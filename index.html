@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gujarat Service Hub - ગુજરાતમાં ગેરેજ, ઇલેક્ટ્રિશિયન, પ્લમ્બર, AC રિપેર અને બીજી સર્વિસ સરળતાથી શોધો.">
+  <meta name="theme-color" content="#071a36">
+  <title>Gujarat Service Hub | ગુજરાતની દરેક સર્વિસ એક જ જગ્યાએ</title>
+
+  <style>
+    :root {
+      --navy: #071a36;
+      --blue: #123c78;
+      --bright: #2878f0;
+      --gold: #f7b844;
+      --light: #f4f7fc;
+      --white: #ffffff;
+      --text: #17243a;
+      --muted: #718096;
+      --border: #e5eaf2;
+      --green: #159c67;
+      --shadow: 0 12px 35px rgba(13, 36, 75, .09);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Noto Sans Gujarati", "Shruti", Arial, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1160px, 92%);
+      margin: auto;
+    }
+
+    .topbar {
+      background: #041126;
+      color: #dce7fa;
+      font-size: 13px;
+      padding: 7px 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .header {
+      background: rgba(255, 255, 255, .97);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--bright));
+      color: white;
+      font-size: 25px;
+      box-shadow: 0 7px 18px #2878f044;
+    }
+
+    .brand-name {
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .brand-name span {
+      color: var(--bright);
+    }
+
+    .brand-tagline {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--bright);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 11px;
+      padding: 12px 19px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .btn-primary {
+      background: var(--bright);
+      color: white;
+      box-shadow: 0 7px 18px #2878f033;
+    }
+
+    .btn-dark {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-outline {
+      border: 1px solid #d4dfef;
+      background: white;
+      color: var(--navy);
+    }
+
+    .btn-whatsapp {
+      background: var(--green);
+      color: white;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(ellipse at 85% 15%, #2678f04d, transparent 36%),
+        radial-gradient(ellipse at 8% 90%, #1c5bbd44, transparent 35%),
+        linear-gradient(125deg, #06142c 0%, #0b2852 60%, #103b73 100%);
+      padding: 86px 0 76px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 370px;
+      height: 370px;
+      border: 1px solid #ffffff13;
+      border-radius: 50%;
+      right: -100px;
+      top: -120px;
+      box-shadow: 0 0 0 45px #ffffff08, 0 0 0 90px #ffffff05;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      align-items: center;
+      gap: 55px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border-radius: 100px;
+      border: 1px solid #ffffff2a;
+      background: #ffffff0d;
+      color: #d9e8ff;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 23px;
+    }
+
+    .eyebrow-dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background: #4ce2a0;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.3;
+      font-weight: 900;
+      letter-spacing: -.8px;
+      margin-bottom: 19px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero-description {
+      color: #c3d4ef;
+      font-size: 16px;
+      max-width: 590px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero .btn-outline {
+      background: #ffffff10;
+      color: white;
+      border-color: #ffffff45;
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: #dbe7f9;
+      font-size: 12px;
+    }
+
+    .hero-points span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card {
+      padding: 26px;
+      border: 1px solid #ffffff28;
+      background: linear-gradient(145deg, #ffffff1c, #ffffff08);
+      border-radius: 24px;
+      box-shadow: 0 25px 70px #00000020;
+      backdrop-filter: blur(15px);
+    }
+
+    .hero-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-card h3 {
+      font-size: 18px;
+    }
+
+    .hero-card-label {
+      font-size: 11px;
+      color: #d1e1fa;
+    }
+
+    .live-badge {
+      font-size: 11px;
+      background: #21a67525;
+      color: #8ff1c6;
+      padding: 5px 9px;
+      border-radius: 20px;
+    }
+
+    .quick-service {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      background: #ffffff0d;
+      border: 1px solid #ffffff12;
+      border-radius: 14px;
+      padding: 13px;
+      margin-bottom: 11px;
+    }
+
+    .quick-icon {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 12px;
+      background: #ffffff17;
+      font-size: 23px;
+      flex-shrink: 0;
+    }
+
+    .quick-service strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .quick-service small {
+      color: #c0d1ea;
+      font-size: 11px;
+    }
+
+    .quick-arrow {
+      margin-left: auto;
+      color: #c3d8f8;
+    }
+
+    .hero-card-bottom {
+      text-align: center;
+      font-size: 12px;
+      color: #d1e1fa;
+      margin-top: 17px;
+    }
+
+    .search-section {
+      position: relative;
+      z-index: 3;
+      margin-top: -28px;
+    }
+
+    .search-box {
+      background: white;
+      border-radius: 17px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      align-items: end;
+      gap: 15px;
+      box-shadow: var(--shadow);
+      border: 1px solid #edf1f7;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: #53647d;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid #dfe6f0;
+      border-radius: 10px;
+      padding: 0 12px;
+      min-height: 47px;
+      background: #fbfcfe;
+    }
+
+    .input-wrap span {
+      font-size: 18px;
+    }
+
+    .input-wrap input,
+    .input-wrap select {
+      border: 0;
+      outline: 0;
+      background: transparent;
+      width: 100%;
+      min-width: 0;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .section-light {
+      background: var(--light);
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 39px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      color: var(--bright);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(25px, 3.5vw, 36px);
+      line-height: 1.4;
+      color: var(--navy);
+      font-weight: 900;
+      margin-bottom: 11px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 23px 17px;
+      border-radius: 17px;
+      transition: .25s;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      color: var(--text);
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      border-color: #b5d1ff;
+      box-shadow: var(--shadow);
+    }
+
+    .category-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: #eef4ff;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .category-card h3 {
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .category-card p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .category-arrow {
+      display: block;
+      color: var(--bright);
+      font-size: 12px;
+      font-weight: 800;
+      margin-top: 13px;
+    }
+
+    .results-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .results-info h3 {
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    .results-info p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: .2s;
+    }
+
+    .service-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .service-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .service-avatar {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      background: #edf3ff;
+      border-radius: 14px;
+      font-size: 27px;
+    }
+
+    .service-card h3 {
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .service-card .location {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .service-card .description {
+      color: #66748a;
+      font-size: 13px;
+      margin-bottom: 17px;
+    }
+
+    .service-card .btn {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .demo-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .how-card {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .how-number {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      background: #eaf2ff;
+      border-radius: 19px;
+      font-size: 28px;
+      margin: 0 auto 18px;
+    }
+
+    .how-card h3 {
+      color: var(--navy);
+      margin-bottom: 9px;
+      font-size: 18px;
+    }
+
+    .how-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .provider-section {
+      padding: 72px 0;
+      background: linear-gradient(120deg, #071a36, #123d77);
+      color: white;
+    }
+
+    .provider-grid {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .provider-section .section-kicker {
+      color: var(--gold);
+    }
+
+    .provider-section h2 {
+      font-size: clamp(27px, 4vw, 39px);
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    .provider-section p {
+      color: #c6d6ef;
+      font-size: 14px;
+      margin-bottom: 23px;
+    }
+
+    .provider-points {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 25px;
+      font-size: 13px;
+      color: #e0eaff;
+    }
+
+    .provider-points span::first-letter {
+      color: #65e0ac;
+    }
+
+    .provider-box {
+      background: white;
+      color: var(--text);
+      padding: 26px;
+      border-radius: 20px;
+      box-shadow: 0 20px 55px #00000020;
+    }
+
+    .provider-box h3 {
+      color: var(--navy);
+      font-size: 21px;
+      margin-bottom: 6px;
+    }
+
+    .provider-box > p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #53647d;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #dce4ef;
+      border-radius: 9px;
+      padding: 11px 12px;
+      outline: 0;
+      background: #fbfcff;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--bright);
+      box-shadow: 0 0 0 3px #2878f018;
+    }
+
+    .provider-box .btn {
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    .form-note {
+      font-size: 11px !important;
+      color: var(--muted) !important;
+      margin: 12px 0 0 !important;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .benefit {
+      text-align: center;
+      padding: 20px 12px;
+    }
+
+    .benefit-icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .benefit h3 {
+      color: var(--navy);
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .cta {
+      background: #edf4ff;
+      padding: 56px 0;
+    }
+
+    .cta-inner {
+      text-align: center;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .cta h2 {
+      font-size: clamp(25px, 3vw, 34px);
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .footer {
+      background: #041126;
+      color: #d5e0f2;
+      padding: 52px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 35px;
+    }
+
+    .footer .brand-name {
+      color: white;
+    }
+
+    .footer .brand-tagline {
+      color: #b5c7e2;
+    }
+
+    .footer-description {
+      color: #a8bad5;
+      font-size: 13px;
+      margin-top: 16px;
+      max-width: 350px;
+    }
+
+    .footer h3 {
+      color: white;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 9px;
+      font-size: 13px;
+      color: #b7c6dc;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #ffffff18;
+      padding-top: 19px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: #91a5c3;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 200;
+      background: #19b76c;
+      color: white;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 27px;
+      box-shadow: 0 8px 25px #00000025;
+      border: 3px solid white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 35px 15px;
+      color: var(--muted);
+      grid-column: 1 / -1;
+      background: white;
+      border: 1px dashed #cdd7e5;
+      border-radius: 14px;
+    }
+
+    .empty-state strong {
+      display: block;
+      color: var(--navy);
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #071a36;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      box-shadow: var(--shadow);
+      display: none;
+      z-index: 300;
+      width: max-content;
+      max-width: 90%;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        gap: 13px;
+      }
+
+      .nav-links a:not(.btn) {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-card {
+        max-width: 520px;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .provider-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 91%;
+      }
+
+      .topbar-inner {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand-icon {
+        width: 41px;
+        height: 41px;
+        font-size: 21px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-tagline {
+        font-size: 9px;
+      }
+
+      .nav-links .btn {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 57px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .hero-card {
+        padding: 18px;
+      }
+
+      .search-box {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+
+      .search-box > .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .category-grid {
+        gap: 12px;
+      }
+
+      .category-card {
+        padding: 17px 13px;
+      }
+
+      .category-icon {
+        width: 47px;
+        height: 47px;
+        font-size: 24px;
+      }
+
+      .category-card h3 {
+        font-size: 13px;
+      }
+
+      .category-card p {
+        font-size: 11px;
+      }
+
+      .service-list {
+        grid-template-columns: 1fr;
+      }
+
+      .how-grid {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .how-card {
+        padding: 13px;
+      }
+
+      .provider-box {
+        padding: 20px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .whatsapp-float {
+        width: 52px;
+        height: 52px;
+        right: 14px;
+        bottom: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>🇮🇳 ગુજરાતનું લોકલ સર્વિસ પ્લેટફોર્મ</span>
+      <span>તમારી નજીકની સર્વિસ શોધો અને સીધો સંપર્ક કરો</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="Gujarat Service Hub હોમ">
+        <div class="brand-icon">G</div>
+        <div>
+          <div class="brand-name">Gujarat <span>Service Hub</span></div>
+          <div class="brand-tagline">FIND SERVICES. CONNECT EASILY.</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#home">હોમ</a>
+        <a href="#categories">સર્વિસ કેટેગરી</a>
+        <a href="#how-it-works">કેવી રીતે કામ કરે?</a>
+        <a href="#register" class="btn btn-primary">+ બિઝનેસ ઉમેરો</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            ગુજરાત માટે બનાવેલું લોકલ સર્વિસ પ્લેટફોર્મ
+          </div>
+
+          <h1>
+            ગુજરાતની દરેક<br>
+            સર્વિસ હવે <span>એક જ જગ્યાએ!</span>
+          </h1>
+
+          <p class="hero-description">
+            કાર ગેરેજથી લઈને ઇલેક્ટ્રિશિયન, પ્લમ્બર અને બીજી અનેક
+            સર્વિસ સુધી — તમારી જરૂરિયાતની સર્વિસ સરળતાથી શોધો
+            અને સર્વિસ આપનાર સાથે સીધો સંપર્ક કરો.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#search" class="btn btn-primary">🔍 સર્વિસ શોધો</a>
+            <a href="#register" class="btn btn-outline">🏪 તમારો બિઝનેસ ઉમેરો</a>
+          </div>
+
+          <div class="hero-points">
+            <span>✓ લોકલ સર્વિસ શોધો</span>
+            <span>✓ સીધો સંપર્ક</span>
+            <span>✓ એક જ પ્લેટફોર્મ</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <div>
+              <h3>તમને કઈ સર્વિસ જોઈએ છે?</h3>
+              <div class="hero-card-label">તમારી જરૂરિયાત મુજબ પસંદ કરો</div>
+            </div>
+            <span class="live-badge">● સરળ શોધ</span>
+          </div>
+
+          <a href="#search" class="quick-service" data-category="ગેરેજ અને કાર રિપેર">
+            <div class="quick-icon">🚗</div>
+            <div>
+              <strong>કાર ગેરેજ અને રિપેર</strong>
+              <small>ગેરેજ, મિકેનિક, ડેન્ટિંગ-પેઇન્ટિંગ</small>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+
+          <a href="#search" class="quick-service" data-category="ઇલેક્ટ્રિશિયન">
+            <div class="quick-icon">⚡</div>
+            <div>
+              <strong>ઇલેક્ટ્રિશિયન</strong>
+              <small>ઘર અને દુકાનની ઇલેક્ટ્રિક સર્વિસ</small>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+
+          <a href="#search" class="quick-service" data-category="પ્લમ્બર">
+            <div class="quick-icon">🔧</div>
+            <div>
+              <strong>પ્લમ્બર</strong>
+              <small>પાણીની લાઇન અને લીકેજ રિપેર</small>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+
+          <div class="hero-card-bottom">
+            તમારી જરૂરિયાત શોધો અને યોગ્ય સર્વિસ આપનારનો સંપર્ક કરો.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-section" id="search">
+      <div class="container">
+        <form class="search-box" id="searchForm">
+          <div class="field">
+            <label for="serviceSearch">તમને કઈ સર્વિસ જોઈએ છે?</label>
+            <div class="input-wrap">
+              <span>🔍</span>
+              <input id="serviceSearch" type="search"
+                placeholder="દા.ત. ગેરેજ, પ્લમ્બર, AC રિપેર">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="citySearch">કયું શહેર અથવા ગામ?</label>
+            <div class="input-wrap">
+              <span>📍</span>
+              <input id="citySearch" type="text"
+                placeholder="દા.ત. બોટાદ, અમદાવાદ">
+            </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit">સર્વિસ શોધો →</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">OUR CATEGORIES</span>
+          <h2>તમારી જરૂરિયાતની સર્વિસ પસંદ કરો</h2>
+          <p>જુદી જુદી કેટેગરીમાંથી તમારી જરૂરી સર્વિસ પસંદ કરો અને વધુ માહિતી મેળવો.</p>
+        </div>
+
+        <div class="category-grid" id="categoryGrid">
+          <button class="category-card" data-category="ગેરેજ અને કાર રિપેર">
+            <div class="category-icon">🚗</div>
+            <h3>ગેરેજ અને કાર રિપેર</h3>
+            <p>કાર મિકેનિક અને રિપેર</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="ડેન્ટિંગ પેઇન્ટિંગ">
+            <div class="category-icon">🛠️</div>
+            <h3>ડેન્ટિંગ-પેઇન્ટિંગ</h3>
+            <p>કાર બોડી અને પેઇન્ટ કામ</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="ઇન્શ્યોરન્સ ક્લેમ">
+            <div class="category-icon">🛡️</div>
+            <h3>ઇન્શ્યોરન્સ ક્લેમ</h3>
+            <p>મોટર ઇન્શ્યોરન્સ માર્ગદર્શન</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="ઇલેક્ટ્રિશિયન">
+            <div class="category-icon">⚡</div>
+            <h3>ઇલેક્ટ્રિશિયન</h3>
+            <p>ઇલેક્ટ્રિક રિપેર અને ફિટિંગ</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="પ્લમ્બર">
+            <div class="category-icon">🚰</div>
+            <h3>પ્લમ્બર</h3>
+            <p>પાણીની લાઇન અને લીકેજ</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="AC રિપેર">
+            <div class="category-icon">❄️</div>
+            <h3>AC રિપેર</h3>
+            <p>AC સર્વિસ અને રિપેર</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="મોબાઇલ રિપેર">
+            <div class="category-icon">📱</div>
+            <h3>મોબાઇલ રિપેર</h3>
+            <p>મોબાઇલ રિપેર અને એસેસરીઝ</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+
+          <button class="category-card" data-category="ઘર અને અન્ય સર્વિસ">
+            <div class="category-icon">🏠</div>
+            <h3>ઘર અને અન્ય સર્વિસ</h3>
+            <p>ઘરની વિવિધ જરૂરિયાતો</p>
+            <span class="category-arrow">સર્વિસ શોધો →</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="services">
+      <div class="container">
+        <div class="results-info">
+          <div>
+            <span class="section-kicker">EXPLORE SERVICES</span>
+            <h3 id="resultsTitle">લોકપ્રિય સર્વિસ કેટેગરી</h3>
+            <p id="resultsSubtitle">તમારી જરૂરિયાત મુજબ કેટેગરી પસંદ કરો.</p>
+          </div>
+          <button class="btn btn-outline" id="resetSearch" type="button">બધી કેટેગરી જુઓ</button>
+        </div>
+
+        <div class="service-list" id="serviceList">
+          <div class="service-card">
+            <div class="service-card-top">
+              <div class="service-avatar">🚗</div>
+              <div>
+                <h3>કાર ગેરેજ અને રિપેર</h3>
+                <div class="location">📍 તમારા શહેરમાં શોધો</div>
+              </div>
+            </div>
+            <p class="description">કાર મિકેનિક, સામાન્ય રિપેર અને વાહન મેન્ટેનન્સ માટે સર્વિસ શોધો.</p>
+            <button class="btn btn-primary category-action" data-category="ગેરેજ અને કાર રિપેર">આ સર્વિસ પસંદ કરો →</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-top">
+              <div class="service-avatar">🛠️</div>
+              <div>
+                <h3>ડેન્ટિંગ-પેઇન્ટિંગ</h3>
+                <div class="location">📍 તમારા શહેરમાં શોધો</div>
+              </div>
+            </div>
+            <p class="description">કારના બોડી વર્ક, ડેન્ટ રિપેર અને પેઇન્ટિંગ માટે સર્વિસ શોધો.</p>
+            <button class="btn btn-primary category-action" data-category="ડેન્ટિંગ પેઇન્ટિંગ">આ સર્વિસ પસંદ કરો →</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-top">
+              <div class="service-avatar">⚡</div>
+              <div>
+                <h3>ઇલેક્ટ્રિશિયન</h3>
+                <div class="location">📍 તમારા શહેરમાં શોધો</div>
+              </div>
+            </div>
+            <p class="description">ઘર, ઓફિસ અને દુકાન માટે ઇલેક્ટ્રિક કામની સર્વિસ શોધો.</p>
+            <button class="btn btn-primary category-action" data-category="ઇલેક્ટ્રિશિયન">આ સર્વિસ પસંદ કરો →</button>
+          </div>
+        </div>
+
+        <p class="demo-note">
+          નોંધ: હાલમાં અહીં કેટેગરીના નમૂના બતાવ્યા છે. વાસ્તવિક બિઝનેસ લિસ્ટિંગ ઉમેર્યા પછી જ સ્થાનિક સર્વિસ પ્રોવાઇડરની માહિતી દેખાશે.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">HOW IT WORKS</span>
+          <h2>માત્ર ત્રણ સરળ સ્ટેપમાં</h2>
+          <p>તમારી જરૂરિયાતની સર્વિસ શોધવાની સરળ રીત.</p>
+        </div>
+
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="how-number">🔎</div>
+            <h3>1. સર્વિસ શોધો</h3>
+            <p>તમને કઈ સર્વિસ જોઈએ છે અને કયા શહેરમાં જોઈએ છે તે પસંદ કરો.</p>
+          </div>
+
+          <div class="how-card">
+            <div class="how-number">📋</div>
+            <h3>2. માહિતી જુઓ</h3>
+            <p>ઉપલબ્ધ બિઝનેસની વિગતો અને સંપર્કની માહિતી તપાસો.</p>
+          </div>
+
+          <div class="how-card">
+            <div class="how-number">🤝</div>
+            <h3>3. સીધો સંપર્ક કરો</h3>
+            <p>સર્વિસ પ્રોવાઇડર સાથે વાત કરીને કામ અને ભાવ નક્કી કરો.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="provider-section" id="register">
+      <div class="container provider-grid">
+        <div>
+          <span class="section-kicker">GROW YOUR BUSINESS</span>
+          <h2>તમારો બિઝનેસ વધુ લોકો સુધી પહોંચાડો!</h2>
+          <p>
+            તમે ગેરેજ ચલાવતા હો, ઇલેક્ટ્રિશિયન હો, પ્લમ્બર હો કે અન્ય
+            કોઈ સર્વિસ આપતા હો — Gujarat Service Hub પર તમારા બિઝનેસની
+            માહિતી ઉમેરવા માટે અરજી કરો.
+          </p>
+
+          <div class="provider-points">
+            <span>✓ તમારા બિઝનેસની ઓળખ વધારવાની તક</span>
+            <span>✓ ગ્રાહકોને તમારી સર્વિસ વિશે માહિતી</span>
+            <span>✓ લોકલથી ગુજરાત સ્તર સુધી પહોંચવાની તક</span>
+          </div>
+
+          <p style="font-size:12px;">
+            નોંધ: અરજી મોકલવાથી બિઝનેસ આપમેળે વેબસાઇટ પર પ્રકાશિત થતો નથી.
+            વિગતોની ચકાસણી અને લિસ્ટિંગની પ્રક્રિયા પછી નક્કી થશે.
+          </p>
+        </div>
+
+        <div class="provider-box">
+          <h3>તમારો બિઝનેસ ઉમેરો</h3>
+          <p>નીચેની માહિતી ભરો. ફોર્મ WhatsApp મેસેજ તૈયાર કરશે.</p>
+
+          <form id="providerForm">
+            <div class="form-group">
+              <label for="providerName">તમારું નામ *</label>
+              <input id="providerName" type="text" placeholder="તમારું પૂરું નામ" required>
+            </div>
+
+            <div class="form-group">
+              <label for="businessName">બિઝનેસનું નામ *</label>
+              <input id="businessName" type="text" placeholder="દા.ત. શ્રીજી ગેરેજ" required>
+            </div>
+
+            <div class="form-group">
+              <label for="providerCategory">સર્વિસ કેટેગરી *</label>
+              <select id="providerCategory" required>
+                <option value="">કેટેગરી પસંદ કરો</option>
+                <option>ગેરેજ અને કાર રિપેર</option>
+                <option>ડેન્ટિંગ પેઇન્ટિંગ</option>
+                <option>ઇન્શ્યોરન્સ ક્લેમ</option>
+                <option>ઇલેક્ટ્રિશિયન</option>
+                <option>પ્લમ્બર</option>
+                <option>AC રિપેર</option>
+                <option>મોબાઇલ રિપેર</option>
+                <option>અન્ય સર્વિસ</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="providerCity">શહેર / ગામ *</label>
+              <input id="providerCity" type="text" placeholder="દા.ત. બોટાદ" required>
+            </div>
+
+            <div class="form-group">
+              <label for="providerPhone">મોબાઇલ નંબર *</label>
+              <input id="providerPhone" type="tel" inputmode="numeric"
+                pattern="[6-9][0-9]{9}" maxlength="10"
+                placeholder="10 અંકનો મોબાઇલ નંબર" required>
+            </div>
+
+            <div class="form-group">
+              <label for="providerDetails">બિઝનેસની વધારાની માહિતી</label>
+              <textarea id="providerDetails" rows="3"
+                placeholder="એડ્રેસ, અનુભવ, ઉપલબ્ધ સર્વિસ વગેરે"></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">WhatsApp પર અરજી મોકલો →</button>
+
+            <p class="form-note">
+              તમારી માહિતી WhatsApp મેસેજમાં સામેલ થશે. મોકલતા પહેલાં તમે મેસેજ ચકાસી શકશો.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">WHY CHOOSE US</span>
+          <h2>Gujarat Service Hub શા માટે?</h2>
+          <p>ગ્રાહકો અને સર્વિસ પ્રોવાઇડરને જોડવાનો સરળ રસ્તો.</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit">
+            <div class="benefit-icon">📍</div>
+            <h3>લોકલ શોધ</h3>
+            <p>શહેર અને ગામ પ્રમાણે સર્વિસ શોધવાની સુવિધા.</p>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">📱</div>
+            <h3>સરળ સંપર્ક</h3>
+            <p>ઉપલબ્ધ સંપર્ક માધ્યમથી સીધી વાતચીત.</p>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">🏪</div>
+            <h3>બિઝનેસ લિસ્ટિંગ</h3>
+            <p>સર્વિસ આપનારને પોતાની માહિતી રજૂ કરવાની તક.</p>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">🌐</div>
+            <h3>ગુજરાતમાં વિસ્તરણ</h3>
+            <p>બોટાદથી શરૂઆત કરીને વધુ શહેરો સુધી પહોંચવાનો હેતુ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-inner">
+        <h2>તમારી સર્વિસને વધુ લોકો સુધી પહોંચાડો</h2>
+        <p>તમે સર્વિસ આપતા હો અથવા કોઈ સર્વિસ શોધતા હો — આજે જ શરૂઆત કરો.</p>
+        <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+          <a href="#categories" class="btn btn-primary">સર્વિસ શોધો</a>
+          <a href="#register" class="btn btn-dark">બિઝનેસ ઉમેરો</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#home" class="brand">
+            <div class="brand-icon">G</div>
+            <div>
+              <div class="brand-name">Gujarat <span>Service Hub</span></div>
+              <div class="brand-tagline">FIND SERVICES. CONNECT EASILY.</div>
+            </div>
+          </a>
+          <p class="footer-description">
+            ગુજરાતમાં ગ્રાહકો અને સ્થાનિક સર્વિસ પ્રોવાઇડરને જોડવા માટેનું
+            સર્વિસ ડિરેક્ટરી પ્લેટફોર્મ.
+          </p>
+        </div>
+
+        <div>
+          <h3>ઝડપી લિંક્સ</h3>
+          <div class="footer-links">
+            <a href="#home">હોમ</a>
+            <a href="#categories">સર્વિસ કેટેગરી</a>
+            <a href="#how-it-works">કેવી રીતે કામ કરે?</a>
+            <a href="#register">બિઝનેસ ઉમેરો</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>લોકપ્રિય કેટેગરી</h3>
+          <div class="footer-links">
+            <a href="#categories">🚗 ગેરેજ અને કાર રિપેર</a>
+            <a href="#categories">🛠️ ડેન્ટિંગ-પેઇન્ટિંગ</a>
+            <a href="#categories">⚡ ઇલેક્ટ્રિશિયન</a>
+            <a href="#categories">🚰 પ્લમ્બર</a>
+            <a href="#categories">❄️ AC રિપેર</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Gujarat Service Hub. સર્વાધિકાર સુરક્ષિત.</span>
+        <span>ગ્રાહકો અને બિઝનેસને જોડવાનું એક સરળ પ્લેટફોર્મ.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#register" class="whatsapp-float" aria-label="બિઝનેસ ઉમેરો">✉</a>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /*
+      મહત્વપૂર્ણ:
+      WhatsApp નંબર નીચે 91XXXXXXXXXX છે.
+      વાસ્તવિક નંબર સેટ કર્યા પછી જ WhatsApp ફોર્મનો ઉપયોગ કરવો.
+      ઉદાહરણ: ભારતીય નંબર 9876543210 હોય તો 919876543210 લખવું.
+    */
+
+    const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+
+    const categories = [
+      {
+        name: "ગેરેજ અને કાર રિપેર",
+        icon: "🚗",
+        description: "કાર મિકેનિક, સામાન્ય રિપેર અને વાહન મેન્ટેનન્સ."
+      },
+      {
+        name: "ડેન્ટિંગ પેઇન્ટિંગ",
+        icon: "🛠️",
+        description: "કાર બોડી વર્ક, ડેન્ટ રિપેર અને પેઇન્ટિંગ."
+      },
+      {
+        name: "ઇન્શ્યોરન્સ ક્લેમ",
+        icon: "🛡️",
+        description: "મોટર ઇન્શ્યોરન્સ ક્લેમ અંગે માર્ગદર્શન."
+      },
+      {
+        name: "ઇલેક્ટ્રિશિયન",
+        icon: "⚡",
+        description: "ઘર, દુકાન અને ઓફિસની ઇલેક્ટ્રિક સર્વિસ."
+      },
+      {
+        name: "પ્લમ્બર",
+        icon: "🚰",
+        description: "પાણીની લાઇન, લીકેજ અને પ્લમ્બિંગ કામ."
+      },
+      {
+        name: "AC રિપેર",
+        icon: "❄️",
+        description: "AC સર્વિસ, ઇન્સ્ટોલેશન અને રિપેર."
+      },
+      {
+        name: "મોબાઇલ રિપેર",
+        icon: "📱",
+        description: "મોબાઇલ રિપેર અને સંબંધિત સર્વિસ."
+      },
+      {
+        name: "ઘર અને અન્ય સર્વિસ",
+        icon: "🏠",
+        description: "ઘરની અન્ય જરૂરી સર્વિસ."
+      }
+    ];
+
+    const serviceList = document.getElementById("serviceList");
+    const searchForm = document.getElementById("searchForm");
+    const serviceSearch = document.getElementById("serviceSearch");
+    const citySearch = document.getElementById("citySearch");
+    const resultsTitle = document.getElementById("resultsTitle");
+    const resultsSubtitle = document.getElementById("resultsSubtitle");
+    const toast = document.getElementById("toast");
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.style.display = "block";
+
+      clearTimeout(showToast.timer);
+
+      showToast.timer = setTimeout(() => {
+        toast.style.display = "none";
+      }, 3500);
+    }
+
+    function normalizeText(value) {
+      return String(value || "")
+        .toLocaleLowerCase("gu")
+        .trim();
+    }
+
+    function renderCategories(list, city) {
+      serviceList.innerHTML = "";
+
+      if (!list.length) {
+        serviceList.innerHTML = `
+          <div class="empty-state">
+            <strong>હાલમાં આ કેટેગરીનો નમૂનો મળ્યો નથી.</strong>
+            બીજી કેટેગરી પસંદ કરો અથવા બિઝનેસ ઉમેરવા માટે અરજી કરો.
+            <br><br>
+            <a class="btn btn-primary" href="#register">બિઝનેસ ઉમેરો</a>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "service-card";
+
+        const cityText = city
+          ? `📍 ${city} માટે શોધ`
+          : "📍 શહેર પસંદ કરીને શોધો";
+
+        card.innerHTML = `
+          <div class="service-card-top">
+            <div class="service-avatar">${item.icon}</div>
+            <div>
+              <h3></h3>
+              <div class="location"></div>
+            </div>
+          </div>
+          <p class="description"></p>
+          <button class="btn btn-primary" type="button">આ કેટેગરી પસંદ કરો →</button>
+        `;
+
+        card.querySelector("h3").textContent = item.name;
+        card.querySelector(".location").textContent = cityText;
+        card.querySelector(".description").textContent = item.description;
+
+        card.querySelector("button").addEventListener("click", () => {
+          serviceSearch.value = item.name;
+          resultsTitle.textContent = item.name;
+          resultsSubtitle.textContent =
+            "આ કેટેગરીનું નમૂનાનું વર્ણન છે; વાસ્તવિક બિઝનેસ લિસ્ટિંગ હજી ઉમેરવાની છે.";
+
+          showToast("કેટેગરી પસંદ થઈ. વાસ્તવિક બિઝનેસની માહિતી ઉમેરવાની બાકી છે.");
+        });
+
+        serviceList.appendChild(card);
+      });
+    }
+
+    function runSearch() {
+      const query = normalizeText(serviceSearch.value);
+      const city = citySearch.value.trim();
+
+      const matches = categories.filter(item => {
+        return !query ||
+          normalizeText(item.name).includes(query) ||
+          normalizeText(item.description).includes(query);
+      });
+
+      resultsTitle.textContent = query
+        ? `શોધનું પરિણામ: ${serviceSearch.value.trim()}`
+        : "લોકપ્રિય સર્વિસ કેટેગરી";
+
+      resultsSubtitle.textContent = city
+        ? `${city} માટે પસંદ કરેલી કેટેગરીઓ. નોંધ: આ કેટેગરીઓ છે, ચકાસેલી બિઝનેસ લિસ્ટિંગ નથી.`
+        : "તમારી જરૂરિયાત મુજબ કેટેગરી પસંદ કરો.";
+
+      renderCategories(matches, city);
+
+      document.getElementById("services").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      runSearch();
+    });
+
+    document.querySelectorAll("[data-category]").forEach(element => {
+      element.addEventListener("click", event => {
+        const category = element.dataset.category;
+
+        if (!category) return;
+
+        event.preventDefault();
+        serviceSearch.value = category;
+
+        runSearch();
+
+        document.getElementById("search").scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      });
+    });
+
+    document.getElementById("resetSearch").addEventListener("click", () => {
+      serviceSearch.value = "";
+      citySearch.value = "";
+
+      resultsTitle.textContent = "લોકપ્રિય સર્વિસ કેટેગરી";
+      resultsSubtitle.textContent =
+        "તમારી જરૂરિયાત મુજબ કેટેગરી પસંદ કરો.";
+
+      renderCategories(categories.slice(0, 6), "");
+
+      document.getElementById("services").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    document.getElementById("providerForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (!/^[6-9][0-9]{9}$/.test(
+        document.getElementById("providerPhone").value.trim()
+      )) {
+        showToast("કૃપા કરીને સાચો 10 અંકનો મોબાઇલ નંબર લખો.");
+        return;
+      }
+
+      if (!/^[0-9]{10,15}$/.test(WHATSAPP_NUMBER)) {
+        showToast("WhatsApp નંબર સેટ કરવાનો બાકી છે. કોડમાં WHATSAPP_NUMBER બદલો.");
+        return;
+      }
+
+      const details = {
+        name: document.getElementById("providerName").value.trim(),
+        business: document.getElementById("businessName").value.trim(),
+        category: document.getElementById("providerCategory").value,
+        city: document.getElementById("providerCity").value.trim(),
+        phone: document.getElementById("providerPhone").value.trim(),
+        extra: document.getElementById("providerDetails").value.trim()
+      };
+
+      const message = [
+        "નમસ્તે Gujarat Service Hub,",
+        "",
+        "મારે મારા બિઝનેસની લિસ્ટિંગ માટે અરજી કરવી છે.",
+        "",
+        "નામ: " + details.name,
+        "બિઝનેસ: " + details.business,
+        "કેટેગરી: " + details.category,
+        "શહેર/ગામ: " + details.city,
+        "મોબાઇલ: " + details.phone,
+        "વધારાની માહિતી: " + (details.extra || "લખેલી નથી"),
+        "",
+        "કૃપા કરીને આગળની પ્રક્રિયા જણાવશો."
+      ].join("\n");
+
+      const url =
+        "https://wa.me/" + WHATSAPP_NUMBER +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    // શરૂઆતમાં કેટેગરીઓના નમૂના બતાવો.
+    renderCategories(categories.slice(0, 6), "");
+  </script>
+
+</body>
+</html>
