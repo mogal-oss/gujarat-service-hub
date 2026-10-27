@@ -1,30 +1,646 @@
-<!doctype html>
-<html lang="gu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Gujarat Service Hub | Admin Login</title>
-<style>
-:root{--navy:#102746;--blue:#1769aa;--gold:#d7a943;--ink:#1b2b40;--muted:#64748b;--border:#dce4ee}*{box-sizing:border-box}body{margin:0;font-family:Arial,'Noto Sans Gujarati',sans-serif;background:linear-gradient(135deg,#edf4fb,#f8fafc);color:var(--ink);min-height:100vh}header{background:var(--navy);color:white;padding:18px 24px}header a{color:#fff;text-decoration:none;font-weight:bold}main{max-width:900px;margin:48px auto;padding:0 18px}.box{background:white;border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 18px 50px #10274618}.kicker{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px}h1{color:var(--navy);margin:8px 0}p{color:var(--muted);line-height:1.6}form{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;margin-top:22px}label{display:block;font-size:14px;margin-bottom:7px}input{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;font-size:16px}button{padding:13px 18px;border:0;border-radius:10px;background:var(--blue);color:white;font-weight:bold;cursor:pointer}button:disabled{opacity:.6}.status{margin-top:14px;font-size:14px}.tools{margin-top:22px}.actions{display:flex;gap:10px;flex-wrap:wrap}.secondary{background:var(--navy)}.list{display:grid;gap:12px;margin-top:16px}.item{border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.item h3{margin:0 0 8px;color:var(--navy)}.item p{margin:4px 0}.approve{background:#16834a}.reject{background:#b42318}.hidden{display:none!important}@media(max-width:700px){form{grid-template-columns:1fr}.box{padding:20px}}
-</style></head><body><header><a href="./">Gujarat Service Hub</a></header><main><div class="box"><span class="kicker">PRIVATE ADMIN AREA</span><h1>એડમિન લૉગિન</h1><p>અહીંથી બિઝનેસ રજિસ્ટ્રેશનની અરજીઓ તપાસી મંજૂર અથવા નામંજૂર કરી શકો છો. આ પેજ જાહેર હોમપેજ પર દેખાતું નથી.</p>
-<form id="loginForm"><div><label for="email">એડમિન ઈમેલ</label><input id="email" type="email" autocomplete="username" required placeholder="એડમિન ઈમેલ"></div><div><label for="password">પાસવર્ડ</label><input id="password" type="password" autocomplete="current-password" required placeholder="પાસવર્ડ"></div><button id="loginBtn">લૉગિન કરો</button></form><div id="status" class="status" role="status">એડમિન માટે લૉગિન જરૂરી છે.</div>
-<div id="tools" class="tools hidden"><div class="actions"><button id="refresh" type="button">અરજીઓ ફરી લોડ કરો</button><button id="logout" class="secondary" type="button">લૉગઆઉટ</button></div><div id="list" class="list"></div></div></div></main>
+```html
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gujarat Service Hub | Admin Panel</title>
+  <meta name="robots" content="noindex,nofollow">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #172033;
+    }
+
+    header {
+      background: #10264b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: #c9d8f5;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px #17203312;
+      margin-bottom: 20px;
+    }
+
+    .login-card {
+      max-width: 430px;
+      margin: 45px auto;
+    }
+
+    h2 { margin-top: 0; }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd5e3;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .primary {
+      background: #155eef;
+      color: white;
+    }
+
+    .full {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .secondary {
+      background: #e8eef8;
+      color: #18345f;
+    }
+
+    .approve {
+      background: #d8f8e5;
+      color: #08783e;
+    }
+
+    .reject {
+      background: #ffe3e3;
+      color: #b42318;
+    }
+
+    .logout {
+      background: #fff;
+      color: #b42318;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 18px 0;
+    }
+
+    .tab.active {
+      background: #155eef;
+      color: white;
+    }
+
+    .hidden { display: none !important; }
+
+    .message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .error {
+      color: #a21b1b;
+      background: #fff0f0;
+    }
+
+    .success {
+      color: #08783e;
+      background: #e8fff0;
+    }
+
+    .notice {
+      color: #684d00;
+      background: #fff7d6;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .application {
+      border: 1px solid #e1e7f0;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 14px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .application h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .application p {
+      line-height: 1.65;
+      margin: 7px 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .muted { color: #667085; }
+
+    @media (max-width: 550px) {
+      .card { padding: 18px; }
+      header h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Gujarat Service Hub</h1>
+  <p>Secure Admin Panel</p>
+</header>
+
+<main class="container">
+
+  <section id="loginSection" class="card login-card">
+    <h2>🔐 Admin Login</h2>
+    <p class="muted">એડમિન ઈમેલ અને પાસવર્ડ દાખલ કરો.</p>
+
+    <form id="loginForm">
+      <label for="email">Admin Email</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+        required
+        placeholder="તમારું Admin Email"
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+        placeholder="તમારો પાસવર્ડ"
+      >
+
+      <button id="loginButton" class="primary full" type="submit">
+        Login
+      </button>
+    </form>
+
+    <div id="loginMessage" class="message hidden"></div>
+  </section>
+
+  <section id="dashboard" class="hidden">
+
+    <div class="card">
+      <div class="toolbar">
+        <div>
+          <h2>👋 Admin Dashboard</h2>
+          <p id="adminEmail" class="muted"></p>
+        </div>
+
+        <button id="logoutButton" class="logout">
+          Logout
+        </button>
+      </div>
+
+      <div class="notice">
+        નોંધ: અરજીઓ જોવા અથવા બદલવા માટે Firebase Firestore Rules માં
+        એડમિનને યોગ્ય પરવાનગી હોવી જરૂરી છે.
+      </div>
+
+      <div class="tabs">
+        <button class="tab active secondary" data-status="pending">
+          ⏳ Pending
+        </button>
+
+        <button class="tab secondary" data-status="approved">
+          ✅ Approved
+        </button>
+
+        <button class="tab secondary" data-status="rejected">
+          ❌ Rejected
+        </button>
+
+        <button id="refreshButton" class="secondary">
+          🔄 Refresh
+        </button>
+      </div>
+
+      <div id="listMessage" class="message hidden"></div>
+      <div id="applicationList"></div>
+    </div>
+
+  </section>
+
+</main>
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, query, where, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-const firebaseConfig = {
-      apiKey: "AIzaSyAcdBH05h8GGrcoAMdjVTDvKzwhsUCOA",
-      authDomain: "gujarat-service-hub.firebaseapp.com",
-      projectId: "gujarat-service-hub",
-      storageBucket: "gujarat-service-hub.firebasestorage.app",
-      messagingSenderId: "866736197862",
-      appId: "1:866736197862:web:bec086ead0c36ec7a76b27",
-      measurementId: "G-1KF592C1JN"
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    updateDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+  // Firebase Console માંથી મળેલી Web App Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcdBH05h8GGrcoAMdjVTDvKzwhsUCOgTA",
+    authDomain: "gujarat-service-hub.firebaseapp.com",
+    projectId: "gujarat-service-hub",
+    storageBucket: "gujarat-service-hub.firebasestorage.app",
+    messagingSenderId: "866736197862",
+    appId: "1:866736197862:web:bec086ead0c36ec7a76b27",
+    measurementId: "G-1KF592C1JN"
+  };
+
+
+  // Admin email allowlist
+  const ADMIN_EMAIL = "udayrajkhachar125@gmail.com";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const loginSection = document.getElementById("loginSection");
+  const dashboard = document.getElementById("dashboard");
+  const loginForm = document.getElementById("loginForm");
+  const loginButton = document.getElementById("loginButton");
+  const loginMessage = document.getElementById("loginMessage");
+  const listMessage = document.getElementById("listMessage");
+  const applicationList = document.getElementById("applicationList");
+
+  let selectedStatus = "pending";
+  let busy = false;
+
+
+  function showMessage(element, message, type = "error") {
+    element.textContent = message;
+    element.className = "message " + type;
+    element.classList.remove("hidden");
+  }
+
+  function hideMessage(element) {
+    element.textContent = "";
+    element.classList.add("hidden");
+  }
+
+  function readableError(error) {
+    const code = error?.code || "";
+    const messages = {
+      "auth/api-key-not-valid":
+        "Firebase API Key માન્ય નથી. Firebase Console માંથી સાચી apiKey તપાસો.",
+
+      "auth/invalid-api-key":
+        "Firebase API Key ખોટી છે. Web App Config તપાસો.",
+
+      "auth/invalid-credential":
+        "ઈમેલ અથવા પાસવર્ડ ખોટો છે. Firebase Authentication માં તપાસો.",
+
+      "auth/invalid-email":
+        "ઈમેલનું ફોર્મેટ ખોટું છે.",
+
+      "auth/user-not-found":
+        "આ ઈમેલનું એકાઉન્ટ Firebase Authentication માં મળ્યું નથી.",
+
+      "auth/wrong-password":
+        "પાસવર્ડ ખોટો છે.",
+
+      "auth/too-many-requests":
+        "ઘણા પ્રયાસો થયા છે. થોડા સમય પછી ફરી પ્રયાસ કરો.",
+
+      "auth/unauthorized-domain":
+        "આ ડોમેન Firebase Authorized domains માં ઉમેરો.",
+
+      "auth/network-request-failed":
+        "ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો.",
+
+      "auth/operation-not-allowed":
+        "Firebase Authentication માં Email/Password ચાલુ કરો.",
+
+      "permission-denied":
+        "Firestore Rules એ આ કાર્યવાહી માટે પરવાનગી આપી નથી."
     };
-const ADMIN_UID = "erpvkfrYTIeMiTUsZvEQSzFmhYC2";
-const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
-const statusEl=document.getElementById('status'), tools=document.getElementById('tools'), list=document.getElementById('list');
-function message(t){statusEl.textContent=t;}
-function isAdmin(){return !!auth.currentUser && auth.currentUser.uid===ADMIN_UID;}
-async function loadPending(){if(!isAdmin()){message('આ પેનલ માટે અધિકૃત એડમિન લૉગિન જરૂરી છે.');return;}list.textContent='અરજીઓ લોડ થઈ રહી છે...';try{const snap=await getDocs(query(collection(db,'businesses'),where('status','==','pending')));list.innerHTML='';if(snap.empty){list.textContent='નવી પેન્ડિંગ અરજી નથી.';return;}for(const d of snap.docs){const b=d.data(),item=document.createElement('div');item.className='item';const info=document.createElement('div'),h=document.createElement('h3');h.textContent=b.businessName||'નામ વગરનો બિઝનેસ';const p=document.createElement('p');p.textContent=`અરજદાર: ${b.providerName||'—'} | કેટેગરી: ${b.category||'—'}`;const p2=document.createElement('p');p2.textContent=`શહેર/ગામ: ${b.city||'—'} | મોબાઇલ: ${b.phone||'—'}`;const p3=document.createElement('p');p3.textContent=`વધારાની માહિતી: ${b.details||'નથી'}`;info.append(h,p,p2,p3);const actions=document.createElement('div');actions.className='actions';for(const [label,state,cls] of [['મંજૂર કરો','approved','approve'],['નામંજૂર કરો','rejected','reject']]){const btn=document.createElement('button');btn.type='button';btn.className=cls;btn.textContent=label;btn.addEventListener('click',()=>updateApplication(d.id,state));actions.append(btn);}item.append(info,actions);list.append(item);}}catch(e){console.error(e);list.textContent='અરજીઓ લોડ થઈ નથી. Admin UID અને Firestore Rules તપાસો.';}}
-async function updateApplication(id,state){if(!isAdmin())return;try{await updateDoc(doc(db,'businesses',id),{status:state,reviewedAt:serverTimestamp(),reviewedBy:auth.currentUser.uid});message(state==='approved'?'બિઝનેસ મંજૂર થયો.':'અરજી નામંજૂર થઈ.');await loadPending();}catch(e){console.error(e);message('સ્ટેટસ બદલાયો નથી. Firestore Rules તપાસો.');}}
-document.getElementById('loginForm').addEventListener('submit',async e=>{e.preventDefault();const btn=document.getElementById('loginBtn');btn.disabled=true;btn.textContent='લૉગિન...';try{const cred=await signInWithEmailAndPassword(auth,document.getElementById('email').value.trim(),document.getElementById('password').value);if(cred.user.uid!==ADMIN_UID){await signOut(auth);message('આ એકાઉન્ટને એડમિન અધિકાર નથી. Firebase માં સાચો Admin UID તપાસો.');tools.classList.add('hidden');return;}message('એડમિન લૉગિન સફળ.');tools.classList.remove('hidden');await loadPending();}catch(err){console.error(err);message('લૉગિન નિષ્ફળ. ઈમેલ/પાસવર્ડ અને Firebase Authentication તપાસો.');}finally{btn.disabled=false;btn.textContent='લૉગિન કરો';}});
-document.getElementById('refresh').addEventListener('click',loadPending);document.getElementById('logout').addEventListener('click',async()=>{await signOut(auth);tools.classList.add('hidden');message('તમે લૉગઆઉટ થઈ ગયા છો.');});onAuthStateChanged(auth,user=>{if(user&&user.uid===ADMIN_UID){tools.classList.remove('hidden');message('એડમિન સેશન સક્રિય છે.');loadPending();}else tools.classList.add('hidden');});
-</script></body></html>
+
+    return messages[code] ||
+      ("ભૂલ: " + (code || error?.message || "અજાણી ભૂલ"));
+  }
+
+
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    hideMessage(loginMessage);
+    loginButton.disabled = true;
+    loginButton.textContent = "લૉગિન થઈ રહ્યું છે...";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      const credential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (
+        credential.user.email?.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+      ) {
+        await signOut(auth);
+
+        showMessage(
+          loginMessage,
+          "આ એકાઉન્ટને આ Admin Panel માટે મંજૂરી નથી."
+        );
+
+        return;
+      }
+
+    } catch (error) {
+      console.error("Admin login failed:", error);
+
+      showMessage(
+        loginMessage,
+        readableError(error)
+      );
+
+    } finally {
+      loginButton.disabled = false;
+      loginButton.textContent = "Login";
+    }
+  });
+
+
+  onAuthStateChanged(auth, (user) => {
+    if (user && user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+      loginSection.classList.add("hidden");
+      dashboard.classList.remove("hidden");
+
+      document.getElementById("adminEmail").textContent = user.email;
+
+      loadApplications(selectedStatus);
+
+    } else {
+      loginSection.classList.remove("hidden");
+      dashboard.classList.add("hidden");
+    }
+  });
+
+
+  document.getElementById("logoutButton").addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      showMessage(loginMessage, readableError(error));
+    }
+  });
+
+
+  document.querySelectorAll("[data-status]").forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedStatus = button.dataset.status;
+
+      document.querySelectorAll("[data-status]").forEach((item) => {
+        item.classList.remove("active", "primary");
+        item.classList.add("secondary");
+      });
+
+      button.classList.add("active");
+      button.classList.remove("secondary");
+
+      loadApplications(selectedStatus);
+    });
+  });
+
+
+  document.getElementById("refreshButton").addEventListener("click", () => {
+    loadApplications(selectedStatus);
+  });
+
+
+  async function loadApplications(status) {
+    if (busy) return;
+
+    if (!auth.currentUser ||
+        auth.currentUser.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+      return;
+    }
+
+    busy = true;
+    applicationList.replaceChildren();
+
+    showMessage(listMessage, "અરજીઓ લોડ થઈ રહી છે...", "success");
+
+    try {
+      const snapshot = await getDocs(collection(db, "businesses"));
+
+      const applications = [];
+
+      snapshot.forEach((item) => {
+        const data = item.data();
+
+        if ((data.status || "pending") === status) {
+          applications.push({
+            id: item.id,
+            ...data
+          });
+        }
+      });
+
+      hideMessage(listMessage);
+
+      if (applications.length === 0) {
+        showMessage(
+          listMessage,
+          "આ વિભાગમાં કોઈ અરજી મળી નથી.",
+          "success"
+        );
+        return;
+      }
+
+      applications.sort((a, b) => {
+        const timeA = a.createdAt?.seconds || 0;
+        const timeB = b.createdAt?.seconds || 0;
+        return timeB - timeA;
+      });
+
+      applications.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "application";
+
+        const title = document.createElement("h3");
+        title.textContent =
+          item.businessName || item.providerName || "બિઝનેસ અરજી";
+
+        card.appendChild(title);
+
+        const fields = [
+          ["અરજદાર", item.providerName],
+          ["બિઝનેસ", item.businessName],
+          ["કેટેગરી", item.category],
+          ["શહેર", item.city],
+          ["મોબાઇલ", item.phone],
+          ["વિગતો", item.details],
+          ["Status", item.status || "pending"],
+          ["Application ID", item.id]
+        ];
+
+        fields.forEach(([label, value]) => {
+          if (value === undefined || value === null || value === "") return;
+
+          const paragraph = document.createElement("p");
+          const strong = document.createElement("strong");
+
+          strong.textContent = label + ": ";
+          paragraph.appendChild(strong);
+          paragraph.appendChild(document.createTextNode(String(value)));
+
+          card.appendChild(paragraph);
+        });
+
+        if (status === "pending") {
+          const actions = document.createElement("div");
+          actions.className = "actions";
+
+          const approveButton = document.createElement("button");
+          approveButton.className = "approve";
+          approveButton.textContent = "✅ મંજૂર કરો";
+
+          approveButton.addEventListener("click", () => {
+            updateApplication(item.id, "approved");
+          });
+
+          const rejectButton = document.createElement("button");
+          rejectButton.className = "reject";
+          rejectButton.textContent = "❌ નામંજૂર કરો";
+
+          rejectButton.addEventListener("click", () => {
+            updateApplication(item.id, "rejected");
+          });
+
+          actions.append(approveButton, rejectButton);
+          card.appendChild(actions);
+        }
+
+        applicationList.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error("Could not load applications:", error);
+
+      showMessage(
+        listMessage,
+        readableError(error) +
+        "\n\nFirebase Firestore Rules અને Admin permissions તપાસો."
+      );
+
+    } finally {
+      busy = false;
+    }
+  }
+
+
+  async function updateApplication(id, status) {
+    if (!auth.currentUser ||
+        auth.currentUser.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+      showMessage(listMessage, "Admin login જરૂરી છે.");
+      return;
+    }
+
+    const actionText = status === "approved" ? "મંજૂર" : "નામંજૂર";
+
+    if (!confirm("શું તમે આ અરજી " + actionText + " કરવા માંગો છો?")) {
+      return;
+    }
+
+    try {
+      await updateDoc(doc(db, "businesses", id), {
+        status: status,
+        reviewedAt: serverTimestamp(),
+        reviewedBy: auth.currentUser.uid
+      });
+
+      showMessage(
+        listMessage,
+        "અરજીનો સ્ટેટસ સફળતાપૂર્વક બદલાયો.",
+        "success"
+      );
+
+      await loadApplications(selectedStatus);
+
+    } catch (error) {
+      console.error("Could not update application:", error);
+
+      showMessage(
+        listMessage,
+        readableError(error) +
+        "\n\nFirestore Rules માં admin update ની પરવાનગી તપાસો."
+      );
+    }
+  }
+
+</script>
+
+</body>
+</html>
+```
