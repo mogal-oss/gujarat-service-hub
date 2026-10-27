@@ -1592,32 +1592,7 @@
       </div>
     </section>
   </main>
-
-
-    <section class="admin-section" id="admin">
-      <div class="container">
-        <div class="admin-box">
-          <span class="section-kicker">ADMINISTRATION</span>
-          <h2>એડમિન પેનલ</h2>
-          <p>માત્ર અધિકૃત એડમિન લૉગિન કરીને નવી બિઝનેસ અરજીઓ મંજૂર અથવા નામંજૂર કરી શકે છે.</p>
-          <form id="adminLoginForm" class="admin-login-grid">
-            <div class="form-group"><label for="adminEmail">એડમિન ઈમેલ</label><input id="adminEmail" type="email" autocomplete="username" placeholder="એડમિન ઈમેલ" required></div>
-            <div class="form-group"><label for="adminPassword">પાસવર્ડ</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="પાસવર્ડ" required></div>
-            <button class="btn btn-primary" type="submit" id="adminLoginButton">લૉગિન કરો</button>
-          </form>
-          <div class="admin-status" id="adminStatus" role="status">એડમિન માટે લૉગિન જરૂરી છે.</div>
-          <div id="adminTools" hidden>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
-              <button class="btn btn-outline" id="refreshPending" type="button">અરજીઓ ફરી લોડ કરો</button>
-              <button class="btn btn-dark" id="adminLogout" type="button">લૉગઆઉટ</button>
-            </div>
-            <div class="admin-list" id="pendingList"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  <footer class="footer">
+<footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
@@ -1641,7 +1616,6 @@
             <a href="#categories">સર્વિસ કેટેગરી</a>
             <a href="#how-it-works">કેવી રીતે કામ કરે?</a>
             <a href="#register">બિઝનેસ ઉમેરો</a>
-            <a href="#admin">એડમિન લૉગિન</a>
           </div>
         </div>
 
@@ -1669,8 +1643,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAcdBH05h8GGrcoAMdjVTDvKzwhsUCOA",
@@ -1682,8 +1656,6 @@
       measurementId: "G-1KF592C1JN"
     };
 
-    // This UID must match the admin UID allowed in the published Firestore rules.
-    const ADMIN_UID = "erpvkfrYTIeMiTUsZvEQSzFmhYC2";
     const WHATSAPP_NUMBER = "919016942705";
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -1855,95 +1827,6 @@
         showToast("અરજી સેવ થઈ નથી. Firebase Authentication અને Firestore Rules તપાસો.");
       } finally {
         submitButton.disabled = false; submitButton.textContent = "બિઝનેસ માટે અરજી મોકલો →";
-      }
-    });
-
-    const adminStatus = document.getElementById("adminStatus");
-    const adminTools = document.getElementById("adminTools");
-    const pendingList = document.getElementById("pendingList");
-    function setAdminMessage(message) { adminStatus.textContent = message; }
-    function isAdmin(user = auth.currentUser) { return !!user && user.uid === ADMIN_UID; }
-
-    async function loadPendingApplications() {
-      if (!isAdmin()) { setAdminMessage("આ પેનલ માટે અધિકૃત એડમિન લૉગિન જરૂરી છે."); return; }
-      pendingList.innerHTML = "<p>અરજીઓ લોડ થઈ રહી છે...</p>";
-      try {
-        const q = query(collection(db, "businesses"), where("status", "==", "pending"));
-        const snapshot = await getDocs(q);
-        pendingList.innerHTML = "";
-        if (snapshot.empty) { pendingList.innerHTML = "<div class='empty-state'><strong>નવી પેન્ડિંગ અરજી નથી.</strong></div>"; return; }
-        snapshot.docs.forEach(snapshotDoc => {
-          const b = snapshotDoc.data();
-          const item = document.createElement("div"); item.className = "admin-item";
-          const info = document.createElement("div");
-          const h = document.createElement("h4"); h.textContent = b.businessName || "નામ વગરનો બિઝનેસ";
-          const line1 = document.createElement("p"); line1.textContent = `અરજદાર: ${b.providerName || "—"} | કેટેગરી: ${b.category || "—"}`;
-          const line2 = document.createElement("p"); line2.textContent = `શહેર/ગામ: ${b.city || "—"} | મોબાઇલ: ${b.phone || "—"}`;
-          const line3 = document.createElement("p"); line3.textContent = `વધારાની માહિતી: ${b.details || "નથી"}`;
-          const badge = document.createElement("span"); badge.className = "status-pill"; badge.textContent = "મંજૂરી બાકી";
-          info.append(h, line1, line2, line3, badge);
-          const actions = document.createElement("div"); actions.className = "admin-actions";
-          const approve = document.createElement("button"); approve.className = "btn btn-success"; approve.textContent = "મંજૂર કરો"; approve.type = "button";
-          const reject = document.createElement("button"); reject.className = "btn btn-danger"; reject.textContent = "નામંજૂર કરો"; reject.type = "button";
-          approve.addEventListener("click", () => updateApplication(snapshotDoc.id, "approved"));
-          reject.addEventListener("click", () => updateApplication(snapshotDoc.id, "rejected"));
-          actions.append(approve, reject); item.append(info, actions); pendingList.appendChild(item);
-        });
-      } catch (error) {
-        console.error("Could not load pending applications:", error);
-        pendingList.innerHTML = ""; setAdminMessage("અરજીઓ લોડ થઈ નથી. Admin UID અને Firestore Rules તપાસો.");
-      }
-    }
-
-    async function updateApplication(id, status) {
-      if (!isAdmin()) { showToast("આ કાર્યવાહી માટે એડમિન અધિકાર જરૂરી છે."); return; }
-      try {
-        await updateDoc(doc(db, "businesses", id), { status, reviewedAt: serverTimestamp(), reviewedBy: auth.currentUser.uid });
-        showToast(status === "approved" ? "બિઝનેસ મંજૂર થયો." : "અરજી નામંજૂર થઈ.");
-        await loadPendingApplications();
-        await loadApprovedBusinesses(); runSearch(false);
-      } catch (error) {
-        console.error("Application update failed:", error);
-        showToast("સ્ટેટસ બદલાયો નથી. Firestore Rules માં admin update ની પરવાનગી તપાસો.");
-      }
-    }
-
-    document.getElementById("adminLoginForm").addEventListener("submit", async event => {
-      event.preventDefault();
-      const email = document.getElementById("adminEmail").value.trim();
-      const password = document.getElementById("adminPassword").value;
-      const button = document.getElementById("adminLoginButton");
-      button.disabled = true; button.textContent = "લૉગિન...";
-      try {
-        const credential = await signInWithEmailAndPassword(auth, email, password);
-        if (credential.user.uid !== ADMIN_UID) {
-          await signOut(auth);
-          setAdminMessage("આ ઈમેલથી લૉગિન થયું, પરંતુ આ UID એડમિન તરીકે સેટ નથી. Firebase માં સાચો Admin UID અને Rules તપાસો.");
-          adminTools.hidden = true; return;
-        }
-        setAdminMessage("એડમિન લૉગિન સફળ. અહીંથી અરજીઓ મેનેજ કરો.");
-        adminTools.hidden = false;
-        await loadPendingApplications();
-      } catch (error) {
-        console.error("Admin login failed:", error);
-        setAdminMessage("લૉગિન નિષ્ફળ. ઈમેલ/પાસવર્ડ અને Firebase Email/Password Authentication તપાસો.");
-      } finally {
-        button.disabled = false; button.textContent = "લૉગિન કરો";
-      }
-    });
-    document.getElementById("refreshPending").addEventListener("click", loadPendingApplications);
-    document.getElementById("adminLogout").addEventListener("click", async () => {
-      try { await signOut(auth); } catch (e) { console.error(e); }
-      adminTools.hidden = true; setAdminMessage("તમે લૉગઆઉટ થઈ ગયા છો.");
-    });
-
-    onAuthStateChanged(auth, user => {
-      if (user && user.uid === ADMIN_UID) {
-        adminTools.hidden = false;
-        setAdminMessage("એડમિન સેશન સક્રિય છે.");
-        loadPendingApplications();
-      } else {
-        adminTools.hidden = true;
       }
     });
 
