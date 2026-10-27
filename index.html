@@ -1023,6 +1023,164 @@
         bottom: 14px;
       }
     }
+
+
+    /* ===== PREMIUM DESIGN UPGRADE (preserves the existing page and features) ===== */
+    :root {
+      --navy: #06152d;
+      --blue: #123c78;
+      --bright: #2878f0;
+      --gold: #f5bd50;
+      --light: #f3f7fd;
+      --shadow: 0 18px 48px rgba(7, 26, 54, .11);
+    }
+    body { background: #fff; }
+    .topbar { background: #030d1d; letter-spacing: .1px; }
+    .header { box-shadow: 0 6px 25px rgba(7,26,54,.055); }
+    .brand-icon {
+      background: linear-gradient(145deg, #0b2852, #2878f0) !important;
+      box-shadow: 0 9px 24px rgba(40,120,240,.28);
+      border-radius: 16px;
+    }
+    .brand-name { letter-spacing: -.35px; }
+    .nav-links a { transition: color .2s ease; }
+    .btn {
+      border-radius: 13px;
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.04); }
+    .btn-primary {
+      background: linear-gradient(135deg, #1769e8, #3288ff) !important;
+      box-shadow: 0 9px 22px rgba(40,120,240,.23);
+    }
+    .hero {
+      background:
+        radial-gradient(ellipse at 86% 15%, rgba(69,143,255,.28), transparent 34%),
+        radial-gradient(ellipse at 6% 95%, rgba(40,120,240,.20), transparent 34%),
+        linear-gradient(125deg, #041126 0%, #0a2853 56%, #174b89 100%) !important;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      border-color: #ffffff18 !important;
+      box-shadow: 0 0 0 38px #ffffff08, 0 0 0 76px #ffffff05 !important;
+    }
+    .hero h1 { letter-spacing: -.8px; }
+    .hero h1 span { color: #f5bd50 !important; }
+    .hero-card {
+      border: 1px solid #ffffff30 !important;
+      border-radius: 26px !important;
+      background: linear-gradient(145deg, #ffffff20, #ffffff08) !important;
+      box-shadow: 0 28px 80px #00000025 !important;
+      backdrop-filter: blur(15px);
+    }
+    .quick-service, .hero-card .quick-service {
+      border-radius: 14px;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .quick-service:hover { transform: translateX(3px); background: #ffffff18; }
+    .search-section { z-index: 5; }
+    .search-box {
+      border: 1px solid #e7edf6 !important;
+      border-radius: 21px !important;
+      box-shadow: 0 18px 48px rgba(7,26,54,.12) !important;
+    }
+    .input-wrap, .form-group input, .form-group select, .form-group textarea {
+      border-radius: 11px !important;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .input-wrap:focus-within, .form-group input:focus, .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #6da6ff !important;
+      box-shadow: 0 0 0 3px rgba(40,120,240,.10) !important;
+    }
+    .section-light { background: linear-gradient(180deg, #f5f8fd, #edf3fb) !important; }
+    .section-heading h2, .results-head h2 { letter-spacing: -.45px; }
+    .category-grid { gap: 17px; }
+    .category-card {
+      border-radius: 20px !important;
+      border: 1px solid #e3eaf4 !important;
+      box-shadow: 0 8px 26px rgba(7,26,54,.045) !important;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .category-card:hover {
+      transform: translateY(-5px);
+      border-color: #c9dcf7 !important;
+      box-shadow: 0 18px 38px rgba(7,26,54,.11) !important;
+    }
+    .category-icon {
+      border-radius: 16px !important;
+      background: linear-gradient(145deg, #edf4ff, #e3eeff) !important;
+    }
+    .service-card {
+      border-radius: 20px !important;
+      border: 1px solid #e3eaf4 !important;
+      box-shadow: 0 10px 30px rgba(7,26,54,.055) !important;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(7,26,54,.11) !important;
+    }
+    .service-avatar { border-radius: 15px !important; }
+    .how-card, .benefit {
+      border-radius: 19px !important;
+      box-shadow: 0 8px 26px rgba(7,26,54,.045);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .how-card:hover, .benefit:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(7,26,54,.10);
+    }
+    .how-number { border-radius: 13px !important; }
+    .register-info, .cta {
+      background:
+        radial-gradient(circle at 90% 15%, rgba(70,144,255,.22), transparent 28%),
+        linear-gradient(125deg, #071a36, #123c78) !important;
+    }
+    .form-card {
+      border-radius: 22px !important;
+      box-shadow: 0 12px 34px rgba(7,26,54,.07) !important;
+    }
+    .btn-whatsapp { background: linear-gradient(135deg, #119c65, #20bd79) !important; }
+    .whatsapp-float {
+      background: #159c67 !important;
+      box-shadow: 0 12px 30px rgba(21,156,103,.32) !important;
+      border: 3px solid #fff;
+      transition: transform .2s ease;
+    }
+    .whatsapp-float:hover { transform: translateY(-3px) scale(1.04); }
+    .footer { background: #030d1d !important; }
+    @media (max-width: 700px) {
+      .hero { padding-top: 58px; padding-bottom: 60px; }
+      .hero-card { border-radius: 22px !important; }
+      .search-box { border-radius: 17px !important; }
+      .category-grid { gap: 11px; }
+      .category-card { padding: 16px 13px; }
+      .service-card { border-radius: 17px !important; }
+      .whatsapp-float { right: 14px; bottom: 14px; width: 54px; height: 54px; }
+    }
+    /* ===== END PREMIUM DESIGN UPGRADE ===== */
+
+
+    .admin-section { background:#f4f7fc; padding:64px 0; }
+    .admin-box { max-width:850px; margin:auto; background:#fff; border:1px solid var(--border); border-radius:18px; padding:24px; box-shadow:var(--shadow); }
+    .admin-box h2 { color:var(--navy); margin-bottom:8px; }
+    .admin-box p { color:var(--muted); font-size:13px; margin-bottom:16px; }
+    .admin-login-grid { display:grid; grid-template-columns:1fr 1fr auto; gap:12px; align-items:end; }
+    .admin-login-grid .form-group { margin:0; }
+    .admin-status { font-size:13px; color:var(--muted); margin-top:12px; }
+    .admin-list { display:grid; gap:12px; margin-top:18px; }
+    .admin-item { border:1px solid var(--border); border-radius:12px; padding:15px; display:flex; align-items:flex-start; justify-content:space-between; gap:15px; flex-wrap:wrap; }
+    .admin-item h4 { color:var(--navy); margin-bottom:4px; }
+    .admin-item p { margin:2px 0; }
+    .admin-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn-success { background:#159c67; color:#fff; }
+    .btn-danger { background:#c93445; color:#fff; }
+    .status-pill { display:inline-block; padding:3px 8px; border-radius:20px; background:#fff2d5; color:#8b5a00; font-size:11px; font-weight:800; }
+    .service-meta { color:var(--muted); font-size:12px; margin-bottom:12px; }
+    @media(max-width:700px) { .admin-login-grid { grid-template-columns:1fr; } .admin-box { padding:17px; } }
+
   </style>
 </head>
 
@@ -1272,9 +1430,7 @@
           </div>
         </div>
 
-        <p class="demo-note">
-          નોંધ: હાલમાં અહીં કેટેગરીના નમૂના બતાવ્યા છે. વાસ્તવિક બિઝનેસ લિસ્ટિંગ ઉમેર્યા પછી જ સ્થાનિક સર્વિસ પ્રોવાઇડરની માહિતી દેખાશે.
-        </p>
+        <p class="demo-note">માત્ર એડમિન દ્વારા મંજૂર થયેલી બિઝનેસ લિસ્ટિંગ જાહેરમાં દેખાશે.</p>
       </div>
     </section>
 
@@ -1333,7 +1489,7 @@
 
         <div class="provider-box">
           <h3>તમારો બિઝનેસ ઉમેરો</h3>
-          <p>નીચેની માહિતી ભરો. ફોર્મ WhatsApp મેસેજ તૈયાર કરશે.</p>
+          <p>નીચેની માહિતી ભરો. અરજી ડેટાબેઝમાં સેવ થશે અને એડમિન મંજૂરી પછી જ પ્રકાશિત થશે.</p>
 
           <form id="providerForm">
             <div class="form-group">
@@ -1379,10 +1535,10 @@
                 placeholder="એડ્રેસ, અનુભવ, ઉપલબ્ધ સર્વિસ વગેરે"></textarea>
             </div>
 
-            <button class="btn btn-primary" type="submit">WhatsApp પર અરજી મોકલો →</button>
+            <button class="btn btn-primary" type="submit">બિઝનેસ માટે અરજી મોકલો →</button>
 
             <p class="form-note">
-              તમારી માહિતી WhatsApp મેસેજમાં સામેલ થશે. મોકલતા પહેલાં તમે મેસેજ ચકાસી શકશો.
+              તમારી અરજી પેન્ડિંગ રહેશે. મંજૂરી પહેલાં તે જાહેર લિસ્ટિંગમાં દેખાશે નહીં.
             </p>
           </form>
         </div>
@@ -1437,6 +1593,30 @@
     </section>
   </main>
 
+
+    <section class="admin-section" id="admin">
+      <div class="container">
+        <div class="admin-box">
+          <span class="section-kicker">ADMINISTRATION</span>
+          <h2>એડમિન પેનલ</h2>
+          <p>માત્ર અધિકૃત એડમિન લૉગિન કરીને નવી બિઝનેસ અરજીઓ મંજૂર અથવા નામંજૂર કરી શકે છે.</p>
+          <form id="adminLoginForm" class="admin-login-grid">
+            <div class="form-group"><label for="adminEmail">એડમિન ઈમેલ</label><input id="adminEmail" type="email" autocomplete="username" placeholder="એડમિન ઈમેલ" required></div>
+            <div class="form-group"><label for="adminPassword">પાસવર્ડ</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="પાસવર્ડ" required></div>
+            <button class="btn btn-primary" type="submit" id="adminLoginButton">લૉગિન કરો</button>
+          </form>
+          <div class="admin-status" id="adminStatus" role="status">એડમિન માટે લૉગિન જરૂરી છે.</div>
+          <div id="adminTools" hidden>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+              <button class="btn btn-outline" id="refreshPending" type="button">અરજીઓ ફરી લોડ કરો</button>
+              <button class="btn btn-dark" id="adminLogout" type="button">લૉગઆઉટ</button>
+            </div>
+            <div class="admin-list" id="pendingList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -1461,6 +1641,7 @@
             <a href="#categories">સર્વિસ કેટેગરી</a>
             <a href="#how-it-works">કેવી રીતે કામ કરે?</a>
             <a href="#register">બિઝનેસ ઉમેરો</a>
+            <a href="#admin">એડમિન લૉગિન</a>
           </div>
         </div>
 
@@ -1486,55 +1667,37 @@
   <a href="#register" class="whatsapp-float" aria-label="બિઝનેસ ઉમેરો">✉</a>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-    /*
-      WhatsApp નંબર આંતરરાષ્ટ્રીય ફોર્મેટમાં રાખેલો છે.
-      ભારતીય નંબર 9016942705 માટે 91 સાથે 919016942705 વપરાય છે.
-    */
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
+    const firebaseConfig = {
+      apiKey: "AIzaSyAcdBH05h8GGrcoAMdjVTDvKzwhsUCOA",
+      authDomain: "gujarat-service-hub.firebaseapp.com",
+      projectId: "gujarat-service-hub",
+      storageBucket: "gujarat-service-hub.firebasestorage.app",
+      messagingSenderId: "866736197862",
+      appId: "1:866736197862:web:bec086ead0c36ec7a76b27",
+      measurementId: "G-1KF592C1JN"
+    };
+
+    // This UID must match the admin UID allowed in the published Firestore rules.
+    const ADMIN_UID = "erpvkfrYTIeMiTUsZvEQSzFmhYC2";
     const WHATSAPP_NUMBER = "919016942705";
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
     const categories = [
-      {
-        name: "ગેરેજ અને કાર રિપેર",
-        icon: "🚗",
-        description: "કાર મિકેનિક, સામાન્ય રિપેર અને વાહન મેન્ટેનન્સ."
-      },
-      {
-        name: "ડેન્ટિંગ પેઇન્ટિંગ",
-        icon: "🛠️",
-        description: "કાર બોડી વર્ક, ડેન્ટ રિપેર અને પેઇન્ટિંગ."
-      },
-      {
-        name: "ઇન્શ્યોરન્સ ક્લેમ",
-        icon: "🛡️",
-        description: "મોટર ઇન્શ્યોરન્સ ક્લેમ અંગે માર્ગદર્શન."
-      },
-      {
-        name: "ઇલેક્ટ્રિશિયન",
-        icon: "⚡",
-        description: "ઘર, દુકાન અને ઓફિસની ઇલેક્ટ્રિક સર્વિસ."
-      },
-      {
-        name: "પ્લમ્બર",
-        icon: "🚰",
-        description: "પાણીની લાઇન, લીકેજ અને પ્લમ્બિંગ કામ."
-      },
-      {
-        name: "AC રિપેર",
-        icon: "❄️",
-        description: "AC સર્વિસ, ઇન્સ્ટોલેશન અને રિપેર."
-      },
-      {
-        name: "મોબાઇલ રિપેર",
-        icon: "📱",
-        description: "મોબાઇલ રિપેર અને સંબંધિત સર્વિસ."
-      },
-      {
-        name: "ઘર અને અન્ય સર્વિસ",
-        icon: "🏠",
-        description: "ઘરની અન્ય જરૂરી સર્વિસ."
-      }
+      { name: "ગેરેજ અને કાર રિપેર", icon: "🚗", description: "કાર મિકેનિક, સામાન્ય રિપેર અને વાહન મેન્ટેનન્સ." },
+      { name: "ડેન્ટિંગ પેઇન્ટિંગ", icon: "🛠️", description: "કાર બોડી વર્ક, ડેન્ટ રિપેર અને પેઇન્ટિંગ." },
+      { name: "ઇન્શ્યોરન્સ ક્લેમ", icon: "🛡️", description: "મોટર ઇન્શ્યોરન્સ ક્લેમ અંગે માર્ગદર્શન." },
+      { name: "ઇલેક્ટ્રિશિયન", icon: "⚡", description: "ઘર, દુકાન અને ઓફિસની ઇલેક્ટ્રિક સર્વિસ." },
+      { name: "પ્લમ્બર", icon: "🚰", description: "પાણીની લાઇન, લીકેજ અને પ્લમ્બિંગ કામ." },
+      { name: "AC રિપેર", icon: "❄️", description: "AC સર્વિસ, ઇન્સ્ટોલેશન અને રિપેર." },
+      { name: "મોબાઇલ રિપેર", icon: "📱", description: "મોબાઇલ રિપેર અને સંબંધિત સર્વિસ." },
+      { name: "ઘર અને અન્ય સર્વિસ", icon: "🏠", description: "ઘરની અન્ય જરૂરી સર્વિસ." }
     ];
 
     const serviceList = document.getElementById("serviceList");
@@ -1544,192 +1707,248 @@
     const resultsTitle = document.getElementById("resultsTitle");
     const resultsSubtitle = document.getElementById("resultsSubtitle");
     const toast = document.getElementById("toast");
+    let approvedBusinesses = [];
 
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
 
     function showToast(message) {
       toast.textContent = message;
       toast.style.display = "block";
-
       clearTimeout(showToast.timer);
-
-      showToast.timer = setTimeout(() => {
-        toast.style.display = "none";
-      }, 3500);
+      showToast.timer = setTimeout(() => { toast.style.display = "none"; }, 4000);
+    }
+    function normalizeText(value) { return String(value || "").toLocaleLowerCase("gu").trim(); }
+    function safePhone(value) { return String(value || "").replace(/\D/g, ""); }
+    function getCategoryIcon(name) {
+      const item = categories.find(c => normalizeText(c.name) === normalizeText(name));
+      return item ? item.icon : "🏪";
     }
 
-    function normalizeText(value) {
-      return String(value || "")
-        .toLocaleLowerCase("gu")
-        .trim();
-    }
-
-    function renderCategories(list, city) {
+    function renderCategoryCards(list, city) {
       serviceList.innerHTML = "";
-
       if (!list.length) {
-        serviceList.innerHTML = `
-          <div class="empty-state">
-            <strong>હાલમાં આ કેટેગરીનો નમૂનો મળ્યો નથી.</strong>
-            બીજી કેટેગરી પસંદ કરો અથવા બિઝનેસ ઉમેરવા માટે અરજી કરો.
-            <br><br>
-            <a class="btn btn-primary" href="#register">બિઝનેસ ઉમેરો</a>
-          </div>
-        `;
+        serviceList.innerHTML = `<div class="empty-state"><strong>આ શોધ માટે કેટેગરી મળી નથી.</strong> બીજી કેટેગરી અથવા શહેર અજમાવો.</div>`;
         return;
       }
-
       list.forEach(item => {
         const card = document.createElement("article");
         card.className = "service-card";
-
-        const cityText = city
-          ? `📍 ${city} માટે શોધ`
-          : "📍 શહેર પસંદ કરીને શોધો";
-
-        card.innerHTML = `
-          <div class="service-card-top">
-            <div class="service-avatar">${item.icon}</div>
-            <div>
-              <h3></h3>
-              <div class="location"></div>
-            </div>
-          </div>
-          <p class="description"></p>
-          <button class="btn btn-primary" type="button">આ કેટેગરી પસંદ કરો →</button>
-        `;
-
-        card.querySelector("h3").textContent = item.name;
-        card.querySelector(".location").textContent = cityText;
-        card.querySelector(".description").textContent = item.description;
-
-        card.querySelector("button").addEventListener("click", () => {
-          serviceSearch.value = item.name;
-          resultsTitle.textContent = item.name;
-          resultsSubtitle.textContent =
-            "આ કેટેગરીનું નમૂનાનું વર્ણન છે; વાસ્તવિક બિઝનેસ લિસ્ટિંગ હજી ઉમેરવાની છે.";
-
-          showToast("કેટેગરી પસંદ થઈ. વાસ્તવિક બિઝનેસની માહિતી ઉમેરવાની બાકી છે.");
-        });
-
-        serviceList.appendChild(card);
+        const top = document.createElement("div"); top.className = "service-card-top";
+        const avatar = document.createElement("div"); avatar.className = "service-avatar"; avatar.textContent = item.icon;
+        const titleWrap = document.createElement("div");
+        const title = document.createElement("h3"); title.textContent = item.name;
+        const loc = document.createElement("div"); loc.className = "location"; loc.textContent = city ? `📍 ${city} માટે કેટેગરી` : "📍 શહેર પ્રમાણે શોધો";
+        titleWrap.append(title, loc); top.append(avatar, titleWrap);
+        const desc = document.createElement("p"); desc.className = "description"; desc.textContent = item.description;
+        const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn btn-primary"; btn.textContent = "આ કેટેગરી પસંદ કરો →";
+        btn.addEventListener("click", () => { serviceSearch.value = item.name; runSearch(false); });
+        card.append(top, desc, btn); serviceList.appendChild(card);
       });
     }
 
-    function runSearch() {
-      const query = normalizeText(serviceSearch.value);
-      const city = citySearch.value.trim();
-
-      const matches = categories.filter(item => {
-        return !query ||
-          normalizeText(item.name).includes(query) ||
-          normalizeText(item.description).includes(query);
-      });
-
-      resultsTitle.textContent = query
-        ? `શોધનું પરિણામ: ${serviceSearch.value.trim()}`
-        : "લોકપ્રિય સર્વિસ કેટેગરી";
-
-      resultsSubtitle.textContent = city
-        ? `${city} માટે પસંદ કરેલી કેટેગરીઓ. નોંધ: આ કેટેગરીઓ છે, ચકાસેલી બિઝનેસ લિસ્ટિંગ નથી.`
-        : "તમારી જરૂરિયાત મુજબ કેટેગરી પસંદ કરો.";
-
-      renderCategories(matches, city);
-
-      document.getElementById("services").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    function renderBusinesses(list) {
+      serviceList.innerHTML = "";
+      if (!list.length) {
+        serviceList.innerHTML = `<div class="empty-state"><strong>હાલમાં મંજૂર થયેલો બિઝનેસ મળ્યો નથી.</strong> બીજી કેટેગરી અથવા શહેર અજમાવો. તમે સર્વિસ પ્રોવાઇડર હો તો તમારી અરજી નોંધાવી શકો છો.<br><br><a class="btn btn-primary" href="#register">બિઝનેસ ઉમેરો</a></div>`;
+        return;
+      }
+      list.forEach(biz => {
+        const card = document.createElement("article"); card.className = "service-card";
+        const top = document.createElement("div"); top.className = "service-card-top";
+        const avatar = document.createElement("div"); avatar.className = "service-avatar"; avatar.textContent = getCategoryIcon(biz.category);
+        const wrap = document.createElement("div");
+        const title = document.createElement("h3"); title.textContent = biz.businessName || biz.business || "સ્થાનિક બિઝનેસ";
+        const loc = document.createElement("div"); loc.className = "location"; loc.textContent = `📍 ${biz.city || "ગુજરાત"}`;
+        wrap.append(title, loc); top.append(avatar, wrap);
+        const cat = document.createElement("div"); cat.className = "service-meta"; cat.textContent = `કેટેગરી: ${biz.category || "અન્ય સર્વિસ"}`;
+        const desc = document.createElement("p"); desc.className = "description"; desc.textContent = biz.details || "સર્વિસની વધુ માહિતી માટે સીધો સંપર્ક કરો.";
+        const phone = safePhone(biz.phone);
+        const contact = document.createElement("a"); contact.className = "btn btn-whatsapp"; contact.textContent = "WhatsApp પર સંપર્ક કરો →";
+        contact.href = `https://wa.me/91${phone}?text=${encodeURIComponent("નમસ્તે, મને તમારા બિઝનેસ વિશે માહિતી જોઈએ છે.")}`;
+        contact.target = "_blank"; contact.rel = "noopener noreferrer";
+        if (!/^[6-9]\d{9}$/.test(phone)) { contact.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("નમસ્તે, મને Gujarat Service Hub પરના બિઝનેસ વિશે માહિતી જોઈએ છે: " + (biz.businessName || biz.business || ""))}`; }
+        card.append(top, cat, desc, contact); serviceList.appendChild(card);
       });
     }
 
-    searchForm.addEventListener("submit", event => {
-      event.preventDefault();
-      runSearch();
-    });
+    async function loadApprovedBusinesses() {
+      try {
+        const q = query(collection(db, "businesses"), where("status", "==", "approved"));
+        const snapshot = await getDocs(q);
+        approvedBusinesses = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      } catch (error) {
+        console.error("Could not load approved businesses:", error);
+        approvedBusinesses = [];
+        showToast("બિઝનેસ માહિતી લોડ થઈ શકી નથી. Firebase Firestore Rules તપાસો.");
+      }
+    }
 
+    function runSearch(scroll = true) {
+      const queryText = normalizeText(serviceSearch.value);
+      const cityText = normalizeText(citySearch.value);
+      const matchingBusinesses = approvedBusinesses.filter(b => {
+        const category = normalizeText(b.category);
+        const name = normalizeText(b.businessName || b.business);
+        const details = normalizeText(b.details);
+        const city = normalizeText(b.city);
+        const matchesService = !queryText || category.includes(queryText) || name.includes(queryText) || details.includes(queryText);
+        const matchesCity = !cityText || city.includes(cityText);
+        return matchesService && matchesCity;
+      });
+      if (matchingBusinesses.length) {
+        resultsTitle.textContent = queryText ? `શોધનું પરિણામ: ${serviceSearch.value.trim()}` : "મંજૂર થયેલા બિઝનેસ";
+        resultsSubtitle.textContent = cityText ? `${citySearch.value.trim()} માટે મંજૂર થયેલા બિઝનેસ.` : "એડમિન દ્વારા મંજૂર થયેલી લિસ્ટિંગ જ અહીં દેખાય છે.";
+        renderBusinesses(matchingBusinesses);
+      } else if (!queryText && !cityText) {
+        resultsTitle.textContent = "લોકપ્રિય સર્વિસ કેટેગરી";
+        resultsSubtitle.textContent = approvedBusinesses.length ? "કેટેગરી પસંદ કરો અથવા મંજૂર થયેલા બિઝનેસ જુઓ." : "હાલમાં મંજૂર થયેલી લિસ્ટિંગ નથી. કેટેગરી પસંદ કરીને શોધ શરૂ કરો.";
+        renderCategoryCards(categories.slice(0, 6), "");
+      } else {
+        const matchedCategories = categories.filter(c => !queryText || normalizeText(c.name).includes(queryText) || normalizeText(c.description).includes(queryText));
+        resultsTitle.textContent = `શોધનું પરિણામ: ${serviceSearch.value.trim() || citySearch.value.trim()}`;
+        resultsSubtitle.textContent = "મેચ થતો મંજૂર બિઝનેસ મળ્યો નથી. નીચે સંબંધિત કેટેગરી છે.";
+        renderCategoryCards(matchedCategories, citySearch.value.trim());
+      }
+      if (scroll) document.getElementById("services").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    searchForm.addEventListener("submit", event => { event.preventDefault(); runSearch(); });
     document.querySelectorAll("[data-category]").forEach(element => {
       element.addEventListener("click", event => {
         const category = element.dataset.category;
-
         if (!category) return;
-
-        event.preventDefault();
-        serviceSearch.value = category;
-
-        runSearch();
-
-        document.getElementById("search").scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
+        event.preventDefault(); serviceSearch.value = category; runSearch(false);
+        document.getElementById("search").scrollIntoView({ behavior: "smooth", block: "center" });
       });
     });
-
     document.getElementById("resetSearch").addEventListener("click", () => {
-      serviceSearch.value = "";
-      citySearch.value = "";
-
-      resultsTitle.textContent = "લોકપ્રિય સર્વિસ કેટેગરી";
-      resultsSubtitle.textContent =
-        "તમારી જરૂરિયાત મુજબ કેટેગરી પસંદ કરો.";
-
-      renderCategories(categories.slice(0, 6), "");
-
-      document.getElementById("services").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      serviceSearch.value = ""; citySearch.value = ""; runSearch();
     });
 
-    document.getElementById("providerForm").addEventListener("submit", event => {
+    // New provider applications are saved as pending. They never appear publicly until admin approval.
+    document.getElementById("providerForm").addEventListener("submit", async event => {
       event.preventDefault();
-
-      if (!/^[6-9][0-9]{9}$/.test(
-        document.getElementById("providerPhone").value.trim()
-      )) {
-        showToast("કૃપા કરીને સાચો 10 અંકનો મોબાઇલ નંબર લખો.");
-        return;
-      }
-
-      if (!/^[0-9]{10,15}$/.test(WHATSAPP_NUMBER)) {
-        showToast("WhatsApp નંબર સેટ કરવાનો બાકી છે. કોડમાં WHATSAPP_NUMBER બદલો.");
-        return;
-      }
-
+      const phone = document.getElementById("providerPhone").value.trim();
+      if (!/^[6-9][0-9]{9}$/.test(phone)) { showToast("કૃપા કરીને સાચો 10 અંકનો મોબાઇલ નંબર લખો."); return; }
       const details = {
-        name: document.getElementById("providerName").value.trim(),
-        business: document.getElementById("businessName").value.trim(),
+        providerName: document.getElementById("providerName").value.trim(),
+        businessName: document.getElementById("businessName").value.trim(),
         category: document.getElementById("providerCategory").value,
         city: document.getElementById("providerCity").value.trim(),
-        phone: document.getElementById("providerPhone").value.trim(),
-        extra: document.getElementById("providerDetails").value.trim()
+        phone,
+        details: document.getElementById("providerDetails").value.trim()
       };
-
-      const message = [
-        "નમસ્તે Gujarat Service Hub,",
-        "",
-        "મારે મારા બિઝનેસની લિસ્ટિંગ માટે અરજી કરવી છે.",
-        "",
-        "નામ: " + details.name,
-        "બિઝનેસ: " + details.business,
-        "કેટેગરી: " + details.category,
-        "શહેર/ગામ: " + details.city,
-        "મોબાઇલ: " + details.phone,
-        "વધારાની માહિતી: " + (details.extra || "લખેલી નથી"),
-        "",
-        "કૃપા કરીને આગળની પ્રક્રિયા જણાવશો."
-      ].join("\n");
-
-      const url =
-        "https://wa.me/" + WHATSAPP_NUMBER +
-        "?text=" + encodeURIComponent(message);
-
-      window.open(url, "_blank", "noopener,noreferrer");
+      const submitButton = event.currentTarget.querySelector('button[type="submit"]');
+      submitButton.disabled = true; submitButton.textContent = "અરજી સેવ થઈ રહી છે...";
+      try {
+        if (!auth.currentUser) await signInAnonymously(auth);
+        await addDoc(collection(db, "businesses"), {
+          ...details,
+          status: "pending",
+          ownerUid: auth.currentUser.uid,
+          createdAt: serverTimestamp()
+        });
+        event.currentTarget.reset();
+        showToast("તમારી અરજી સફળતાપૂર્વક મોકલાઈ. એડમિન મંજૂરી પછી જ બિઝનેસ દેખાશે.");
+      } catch (error) {
+        console.error("Application submission failed:", error);
+        showToast("અરજી સેવ થઈ નથી. Firebase Authentication અને Firestore Rules તપાસો.");
+      } finally {
+        submitButton.disabled = false; submitButton.textContent = "બિઝનેસ માટે અરજી મોકલો →";
+      }
     });
 
-    // શરૂઆતમાં કેટેગરીઓના નમૂના બતાવો.
-    renderCategories(categories.slice(0, 6), "");
+    const adminStatus = document.getElementById("adminStatus");
+    const adminTools = document.getElementById("adminTools");
+    const pendingList = document.getElementById("pendingList");
+    function setAdminMessage(message) { adminStatus.textContent = message; }
+    function isAdmin(user = auth.currentUser) { return !!user && user.uid === ADMIN_UID; }
+
+    async function loadPendingApplications() {
+      if (!isAdmin()) { setAdminMessage("આ પેનલ માટે અધિકૃત એડમિન લૉગિન જરૂરી છે."); return; }
+      pendingList.innerHTML = "<p>અરજીઓ લોડ થઈ રહી છે...</p>";
+      try {
+        const q = query(collection(db, "businesses"), where("status", "==", "pending"));
+        const snapshot = await getDocs(q);
+        pendingList.innerHTML = "";
+        if (snapshot.empty) { pendingList.innerHTML = "<div class='empty-state'><strong>નવી પેન્ડિંગ અરજી નથી.</strong></div>"; return; }
+        snapshot.docs.forEach(snapshotDoc => {
+          const b = snapshotDoc.data();
+          const item = document.createElement("div"); item.className = "admin-item";
+          const info = document.createElement("div");
+          const h = document.createElement("h4"); h.textContent = b.businessName || "નામ વગરનો બિઝનેસ";
+          const line1 = document.createElement("p"); line1.textContent = `અરજદાર: ${b.providerName || "—"} | કેટેગરી: ${b.category || "—"}`;
+          const line2 = document.createElement("p"); line2.textContent = `શહેર/ગામ: ${b.city || "—"} | મોબાઇલ: ${b.phone || "—"}`;
+          const line3 = document.createElement("p"); line3.textContent = `વધારાની માહિતી: ${b.details || "નથી"}`;
+          const badge = document.createElement("span"); badge.className = "status-pill"; badge.textContent = "મંજૂરી બાકી";
+          info.append(h, line1, line2, line3, badge);
+          const actions = document.createElement("div"); actions.className = "admin-actions";
+          const approve = document.createElement("button"); approve.className = "btn btn-success"; approve.textContent = "મંજૂર કરો"; approve.type = "button";
+          const reject = document.createElement("button"); reject.className = "btn btn-danger"; reject.textContent = "નામંજૂર કરો"; reject.type = "button";
+          approve.addEventListener("click", () => updateApplication(snapshotDoc.id, "approved"));
+          reject.addEventListener("click", () => updateApplication(snapshotDoc.id, "rejected"));
+          actions.append(approve, reject); item.append(info, actions); pendingList.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Could not load pending applications:", error);
+        pendingList.innerHTML = ""; setAdminMessage("અરજીઓ લોડ થઈ નથી. Admin UID અને Firestore Rules તપાસો.");
+      }
+    }
+
+    async function updateApplication(id, status) {
+      if (!isAdmin()) { showToast("આ કાર્યવાહી માટે એડમિન અધિકાર જરૂરી છે."); return; }
+      try {
+        await updateDoc(doc(db, "businesses", id), { status, reviewedAt: serverTimestamp(), reviewedBy: auth.currentUser.uid });
+        showToast(status === "approved" ? "બિઝનેસ મંજૂર થયો." : "અરજી નામંજૂર થઈ.");
+        await loadPendingApplications();
+        await loadApprovedBusinesses(); runSearch(false);
+      } catch (error) {
+        console.error("Application update failed:", error);
+        showToast("સ્ટેટસ બદલાયો નથી. Firestore Rules માં admin update ની પરવાનગી તપાસો.");
+      }
+    }
+
+    document.getElementById("adminLoginForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const email = document.getElementById("adminEmail").value.trim();
+      const password = document.getElementById("adminPassword").value;
+      const button = document.getElementById("adminLoginButton");
+      button.disabled = true; button.textContent = "લૉગિન...";
+      try {
+        const credential = await signInWithEmailAndPassword(auth, email, password);
+        if (credential.user.uid !== ADMIN_UID) {
+          await signOut(auth);
+          setAdminMessage("આ ઈમેલથી લૉગિન થયું, પરંતુ આ UID એડમિન તરીકે સેટ નથી. Firebase માં સાચો Admin UID અને Rules તપાસો.");
+          adminTools.hidden = true; return;
+        }
+        setAdminMessage("એડમિન લૉગિન સફળ. અહીંથી અરજીઓ મેનેજ કરો.");
+        adminTools.hidden = false;
+        await loadPendingApplications();
+      } catch (error) {
+        console.error("Admin login failed:", error);
+        setAdminMessage("લૉગિન નિષ્ફળ. ઈમેલ/પાસવર્ડ અને Firebase Email/Password Authentication તપાસો.");
+      } finally {
+        button.disabled = false; button.textContent = "લૉગિન કરો";
+      }
+    });
+    document.getElementById("refreshPending").addEventListener("click", loadPendingApplications);
+    document.getElementById("adminLogout").addEventListener("click", async () => {
+      try { await signOut(auth); } catch (e) { console.error(e); }
+      adminTools.hidden = true; setAdminMessage("તમે લૉગઆઉટ થઈ ગયા છો.");
+    });
+
+    onAuthStateChanged(auth, user => {
+      if (user && user.uid === ADMIN_UID) {
+        adminTools.hidden = false;
+        setAdminMessage("એડમિન સેશન સક્રિય છે.");
+        loadPendingApplications();
+      } else {
+        adminTools.hidden = true;
+      }
+    });
+
+    await loadApprovedBusinesses();
+    renderCategoryCards(categories.slice(0, 6), "");
   </script>
 
 </body>
