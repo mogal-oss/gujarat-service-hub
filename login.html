@@ -1,0 +1,366 @@
+```html
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071a36">
+<title>Login | Gujarat Service Hub</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Noto Sans Gujarati","Shruti",Arial,sans-serif;
+  background:linear-gradient(135deg,#071a36,#123c78,#2878f0);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  color:#17243a
+}
+.card{
+  width:100%;
+  max-width:440px;
+  background:#fff;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 25px 70px #0003
+}
+.logo{text-align:center;font-size:42px}
+h1{text-align:center;color:#071a36;margin:8px 0}
+.sub{text-align:center;color:#718096;margin-bottom:24px}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{
+  flex:1;padding:12px;border:0;border-radius:10px;
+  background:#edf2fa;font-weight:bold;cursor:pointer
+}
+.tab.active{background:#123c78;color:white}
+label{display:block;font-weight:bold;margin:14px 0 6px}
+input{
+  width:100%;padding:13px;border:1px solid #d8e0ed;
+  border-radius:10px;font-size:16px;outline:none
+}
+input:focus{border-color:#2878f0}
+button{font-family:inherit}
+.action{
+  width:100%;padding:13px;margin-top:17px;border:0;
+  border-radius:10px;background:#2878f0;color:white;
+  font-size:16px;font-weight:bold;cursor:pointer
+}
+.action:disabled{opacity:.6;cursor:wait}
+.links{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
+.link{border:0;background:none;color:#2878f0;cursor:pointer;font-weight:bold}
+.note{font-size:12px;color:#718096;line-height:1.7;margin-top:18px}
+.status{display:none;padding:12px;border-radius:10px;margin-top:15px;overflow-wrap:anywhere}
+.status.show{display:block}
+.error{background:#fff0f0;color:#a11}
+.success{background:#e9f9ef;color:#17643a}
+.hidden{display:none!important}
+.back{display:block;text-align:center;margin-top:20px;color:#123c78;text-decoration:none;font-weight:bold}
+#recaptcha-container{margin-top:14px;overflow:hidden}
+@media(max-width:380px){.card{padding:22px}.links{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <div class="logo">🛠️</div>
+  <h1>Gujarat Service Hub</h1>
+  <p class="sub">તમારી સર્વિસ માટે લોગિન કરો</p>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" id="emailTab" type="button">ઈમેઇલ</button>
+    <button class="tab" id="phoneTab" type="button">મોબાઈલ OTP</button>
+  </div>
+
+  <div id="emailPanel">
+    <form id="emailForm">
+      <label for="email">ઈમેઇલ એડ્રેસ</label>
+      <input id="email" type="email" autocomplete="email"
+             placeholder="તમારું ઈમેઇલ દાખલ કરો" required>
+
+      <label for="password">પાસવર્ડ</label>
+      <input id="password" type="password" minlength="6"
+             autocomplete="current-password"
+             placeholder="પાસવર્ડ દાખલ કરો" required>
+
+      <button class="action" id="emailSubmit" type="submit">લોગિન કરો</button>
+    </form>
+
+    <div class="links">
+      <button class="link" id="toggleMode" type="button">નવું એકાઉન્ટ બનાવો</button>
+      <button class="link" id="forgot" type="button">પાસવર્ડ ભૂલી ગયા?</button>
+    </div>
+  </div>
+
+  <div id="phonePanel" class="hidden">
+    <label for="phone">મોબાઈલ નંબર</label>
+    <input id="phone" type="tel" autocomplete="tel"
+           inputmode="tel" placeholder="+91 98765 43210">
+
+    <div id="recaptcha-container"></div>
+
+    <button class="action" id="sendOtp" type="button">OTP મોકલો</button>
+
+    <div id="otpArea" class="hidden">
+      <label for="otp">SMSમાં આવેલ OTP</label>
+      <input id="otp" type="text" inputmode="numeric"
+             autocomplete="one-time-code" maxlength="6"
+             placeholder="6 અંકનો OTP">
+      <button class="action" id="verifyOtp" type="button">
+        OTP ચકાસો અને લોગિન કરો
+      </button>
+    </div>
+  </div>
+
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+
+  <div id="accountPanel" class="hidden">
+    <p id="accountInfo"></p>
+    <button class="action" id="logout" type="button">લોગઆઉટ</button>
+  </div>
+
+  <p class="note">
+    નવું એકાઉન્ટ બનાવવા માટે ઈમેઇલ અને ઓછામાં ઓછા 6 અક્ષરનો
+    પાસવર્ડ દાખલ કરો. મોબાઈલ OTP માટે SMS અને reCAPTCHA ચકાસણી જરૂરી છે.
+  </p>
+
+  <a class="back" href="index.html">← મુખ્ય વેબસાઈટ પર પાછા જાઓ</a>
+</div>
+
+<script type="module">
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAcdBH05h8GGrcoAMdjVTDvKzwhsUCOA",
+  authDomain: "gujarat-service-hub.firebaseapp.com",
+  projectId: "gujarat-service-hub",
+  storageBucket: "gujarat-service-hub.firebasestorage.app",
+  messagingSenderId: "866736197862",
+  appId: "1:866736197862:web:bec086ead0c36ec7a76b27",
+  measurementId: "G-1KF592C1JN"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const $ = id => document.getElementById(id);
+
+let mode = "login";
+let confirmationResult = null;
+let recaptcha = null;
+let recaptchaPromise = null;
+
+function showMessage(text, type = "success") {
+  const box = $("status");
+  box.textContent = text;
+  box.className = "status show " + type;
+}
+
+function errorMessage(error) {
+  const messages = {
+    "auth/email-already-in-use": "આ ઈમેઇલથી એકાઉન્ટ પહેલેથી જ છે.",
+    "auth/invalid-email": "ઈમેઇલ એડ્રેસ સાચું નથી.",
+    "auth/weak-password": "પાસવર્ડ ઓછામાં ઓછા 6 અક્ષરનો રાખો.",
+    "auth/invalid-credential": "ઈમેઇલ અથવા પાસવર્ડ ખોટો છે.",
+    "auth/user-not-found": "આ ઈમેઇલથી એકાઉન્ટ મળ્યું નથી.",
+    "auth/wrong-password": "પાસવર્ડ ખોટો છે.",
+    "auth/too-many-requests": "ઘણા પ્રયત્નો થયા છે. થોડા સમય પછી ફરી પ્રયાસ કરો.",
+    "auth/invalid-phone-number": "મોબાઈલ નંબર સાચો નથી.",
+    "auth/invalid-verification-code": "OTP ખોટો છે.",
+    "auth/code-expired": "OTPની સમયમર્યાદા પૂરી થઈ છે. ફરી OTP મંગાવો.",
+    "auth/unauthorized-domain": "Firebaseમાં આ વેબસાઈટનું ડોમેન Authorized Domainsમાં ઉમેરો.",
+    "auth/operation-not-allowed": "Firebaseમાં આ Login પદ્ધતિ Enable કરો."
+  };
+  showMessage(messages[error.code] || ("સમસ્યા: " + error.message), "error");
+}
+
+function setMode(next) {
+  mode = next;
+  $("emailSubmit").textContent =
+    mode === "login" ? "લોગિન કરો" : "એકાઉન્ટ બનાવો";
+  $("toggleMode").textContent =
+    mode === "login" ? "નવું એકાઉન્ટ બનાવો" : "પહેલેથી એકાઉન્ટ છે? લોગિન કરો";
+  $("password").autocomplete =
+    mode === "login" ? "current-password" : "new-password";
+  $("status").className = "status";
+}
+
+$("toggleMode").addEventListener("click", () => {
+  setMode(mode === "login" ? "register" : "login");
+});
+
+$("emailTab").addEventListener("click", () => {
+  $("emailTab").classList.add("active");
+  $("phoneTab").classList.remove("active");
+  $("emailPanel").classList.remove("hidden");
+  $("phonePanel").classList.add("hidden");
+  $("status").className = "status";
+});
+
+$("phoneTab").addEventListener("click", () => {
+  $("phoneTab").classList.add("active");
+  $("emailTab").classList.remove("active");
+  $("phonePanel").classList.remove("hidden");
+  $("emailPanel").classList.add("hidden");
+  $("status").className = "status";
+});
+
+$("emailForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const button = $("emailSubmit");
+
+  button.disabled = true;
+
+  try {
+    if (mode === "register") {
+      await createUserWithEmailAndPassword(auth, email, password);
+      showMessage("તમારું એકાઉન્ટ સફળતાપૂર્વક બની ગયું!");
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+      showMessage("લોગિન સફળ થયું!");
+    }
+  } catch (error) {
+    errorMessage(error);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("forgot").addEventListener("click", async () => {
+  const email = $("email").value.trim();
+
+  if (!email) {
+    showMessage("પહેલા ઈમેઇલ એડ્રેસ દાખલ કરો.", "error");
+    $("email").focus();
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showMessage("પાસવર્ડ રીસેટ માટે ઈમેઇલ મોકલ્યો છે. Inbox અને Spam તપાસો.");
+  } catch (error) {
+    errorMessage(error);
+  }
+});
+
+async function setupRecaptcha() {
+  if (!recaptchaPromise) {
+    recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {
+      size: "normal",
+      callback: () => {},
+      "expired-callback": () => {
+        showMessage("reCAPTCHAની સમયમર્યાદા પૂરી થઈ. ફરી ચકાસો.", "error");
+      }
+    });
+
+    recaptchaPromise = recaptcha.render();
+  }
+
+  await recaptchaPromise;
+}
+
+$("sendOtp").addEventListener("click", async () => {
+  let phone = $("phone").value.trim().replace(/[\s()-]/g, "");
+
+  if (/^\d{10}$/.test(phone)) phone = "+91" + phone;
+
+  if (!/^\+[1-9]\d{7,14}$/.test(phone)) {
+    showMessage("મોબાઈલ નંબર +91 સાથે સાચી રીતે દાખલ કરો.", "error");
+    return;
+  }
+
+  const button = $("sendOtp");
+  button.disabled = true;
+
+  try {
+    await setupRecaptcha();
+    confirmationResult = await signInWithPhoneNumber(auth, phone, recaptcha);
+    $("otpArea").classList.remove("hidden");
+    showMessage("OTP મોકલ્યો છે. તમારા SMS તપાસો.");
+  } catch (error) {
+    errorMessage(error);
+
+    if (recaptcha) {
+      recaptcha.clear();
+      recaptcha = null;
+      recaptchaPromise = null;
+      $("recaptcha-container").innerHTML = "";
+    }
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("verifyOtp").addEventListener("click", async () => {
+  const code = $("otp").value.trim();
+
+  if (!confirmationResult) {
+    showMessage("પહેલા OTP મંગાવો.", "error");
+    return;
+  }
+
+  if (!/^\d{6}$/.test(code)) {
+    showMessage("6 અંકનો OTP દાખલ કરો.", "error");
+    return;
+  }
+
+  const button = $("verifyOtp");
+  button.disabled = true;
+
+  try {
+    await confirmationResult.confirm(code);
+    showMessage("મોબાઈલ OTPથી લોગિન સફળ થયું!");
+  } catch (error) {
+    errorMessage(error);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("logout").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    showMessage("તમે સફળતાપૂર્વક લોગઆઉટ થયા.");
+  } catch (error) {
+    errorMessage(error);
+  }
+});
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    $("accountPanel").classList.remove("hidden");
+    $("accountInfo").textContent =
+      "લોગિન થયેલ એકાઉન્ટ: " + (user.email || user.phoneNumber || "ગ્રાહક");
+
+    $("tabs").classList.add("hidden");
+    $("emailPanel").classList.add("hidden");
+    $("phonePanel").classList.add("hidden");
+  } else {
+    $("accountPanel").classList.add("hidden");
+    $("tabs").classList.remove("hidden");
+    $("emailPanel").classList.remove("hidden");
+    $("toggleMode").classList.remove("hidden");
+    $("forgot").classList.remove("hidden");
+  }
+});
+</script>
+</body>
+</html>
+```
