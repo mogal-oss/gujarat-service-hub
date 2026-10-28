@@ -1163,6 +1163,46 @@
     /* ===== END PREMIUM DESIGN UPGRADE ===== */
 
 
+
+    /* Signed-in profile menu */
+    .profile-menu { position:relative; }
+    .profile-menu[hidden], .profile-dropdown[hidden] { display:none !important; }
+    .profile-trigger {
+      display:flex; align-items:center; gap:8px; border:1px solid #dce5f2;
+      background:#fff; color:var(--navy); border-radius:13px; padding:8px 11px;
+      font-weight:800; font-size:13px; max-width:220px;
+    }
+    .profile-avatar {
+      width:32px; height:32px; display:grid; place-items:center; border-radius:50%;
+      background:#eaf2ff; color:var(--blue); flex-shrink:0;
+    }
+    .profile-dropdown {
+      position:absolute; top:calc(100% + 10px); right:0; width:245px; z-index:500;
+      background:#fff; border:1px solid var(--border); border-radius:15px;
+      box-shadow:0 18px 45px rgba(7,26,54,.18); padding:8px;
+    }
+    .profile-summary { padding:12px; border-bottom:1px solid var(--border); margin-bottom:5px; }
+    .profile-summary strong,.profile-summary small { display:block; overflow-wrap:anywhere; }
+    .profile-summary strong { color:var(--navy); font-size:14px; }
+    .profile-summary small { color:var(--muted); font-size:11px; margin-top:3px; }
+    .profile-item {
+      display:block; width:100%; padding:11px 12px; border:0; border-radius:9px;
+      background:transparent; color:var(--text); text-align:left; font-size:13px;
+      font-weight:700; cursor:pointer;
+    }
+    .profile-item:hover { background:#f1f6ff; color:var(--bright); }
+    .profile-logout { color:#c93445; }
+    @media(max-width:900px) {
+      .profile-trigger { padding:7px; font-size:11px; }
+      .profile-trigger #profileDisplayName { max-width:75px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .profile-dropdown { right:0; }
+    }
+    @media(max-width:600px) {
+      .profile-trigger { gap:5px; }
+      .profile-avatar { width:28px; height:28px; }
+      .profile-dropdown { width:230px; }
+    }
+
     .admin-section { background:#f4f7fc; padding:64px 0; }
     .admin-box { max-width:850px; margin:auto; background:#fff; border:1px solid var(--border); border-radius:18px; padding:24px; box-shadow:var(--shadow); }
     .admin-box h2 { color:var(--navy); margin-bottom:8px; }
@@ -1207,8 +1247,25 @@
         <a href="#home">હોમ</a>
         <a href="#categories">સર્વિસ કેટેગરી</a>
         <a href="#how-it-works">કેવી રીતે કામ કરે?</a>
-        <a href="login.html" class="btn btn-primary">લોગિન / એકાઉન્ટ</a>
-        <a href="#register" class="btn btn-primary">+ બિઝનેસ ઉમેરો</a>
+        <a href="login.html" class="btn btn-primary" id="loginNavButton">લોગિન / એકાઉન્ટ</a>
+        <div class="profile-menu" id="profileMenu" hidden>
+          <button type="button" class="profile-trigger" id="profileTrigger" aria-haspopup="true" aria-expanded="false">
+            <span class="profile-avatar" id="profileAvatar">👤</span>
+            <span id="profileDisplayName">મારું એકાઉન્ટ</span>
+            <span aria-hidden="true">▾</span>
+          </button>
+          <div class="profile-dropdown" id="profileDropdown" hidden>
+            <div class="profile-summary">
+              <strong id="profileName">વપરાશકર્તા</strong>
+              <small id="profileEmail"></small>
+            </div>
+            <button type="button" class="profile-item" id="profileInfoButton">👤 પ્રોફાઇલ માહિતી</button>
+            <a class="profile-item" href="#myApplications" id="myApplicationsLink">📋 મારી અરજીઓ</a>
+            <a class="profile-item" href="login.html#account-settings" id="accountSettingsLink">⚙️ એકાઉન્ટ સેટિંગ્સ</a>
+            <button type="button" class="profile-item profile-logout" id="profileLogoutButton">↪ લૉગઆઉટ</button>
+          </div>
+        </div>
+        <a href="#register" class="btn btn-primary" id="businessNavButton">+ બિઝનેસ ઉમેરો</a>
       </nav>
     </div>
   </header>
@@ -1466,6 +1523,7 @@
     </section>
 
     <section class="provider-section" id="register">
+      <span id="myApplications" aria-hidden="true" style="display:block;position:relative;top:-90px;visibility:hidden;"></span>
       <div class="container provider-grid">
         <div>
           <span class="section-kicker">GROW YOUR BUSINESS</span>
@@ -1859,6 +1917,73 @@
       }
     });
 
+
+    // Update the header according to the real Firebase email/password session.
+    const loginNavButton = document.getElementById("loginNavButton");
+    const profileMenu = document.getElementById("profileMenu");
+    const profileTrigger = document.getElementById("profileTrigger");
+    const profileDropdown = document.getElementById("profileDropdown");
+    const profileDisplayName = document.getElementById("profileDisplayName");
+    const profileName = document.getElementById("profileName");
+    const profileEmail = document.getElementById("profileEmail");
+    const businessNavButton = document.getElementById("businessNavButton");
+
+    function closeProfileMenu() {
+      profileDropdown.hidden = true;
+      profileTrigger.setAttribute("aria-expanded", "false");
+    }
+    profileTrigger.addEventListener("click", () => {
+      const opening = profileDropdown.hidden;
+      profileDropdown.hidden = !opening;
+      profileTrigger.setAttribute("aria-expanded", String(opening));
+    });
+    document.addEventListener("click", event => {
+      if (!profileMenu.contains(event.target)) closeProfileMenu();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeProfileMenu();
+    });
+
+    document.getElementById("profileInfoButton").addEventListener("click", () => {
+      const user = auth.currentUser;
+      if (!user || user.isAnonymous) {
+        showToast("પ્રોફાઇલ જોવા માટે પહેલા લૉગિન કરો.");
+        return;
+      }
+      showToast("પ્રોફાઇલ ઈમેલ: " + (user.email || "ઉપલબ્ધ નથી"));
+      closeProfileMenu();
+    });
+
+    document.getElementById("profileLogoutButton").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        closeProfileMenu();
+        showToast("તમે સફળતાપૂર્વક લૉગઆઉટ થયા છો.");
+      } catch (error) {
+        console.error("Profile logout failed:", error);
+        showToast("લૉગઆઉટ થઈ શક્યું નથી. ફરી પ્રયાસ કરો.");
+      }
+    });
+    document.getElementById("myApplicationsLink").addEventListener("click", () => closeProfileMenu());
+    document.getElementById("accountSettingsLink").addEventListener("click", () => closeProfileMenu());
+
+    function updateHeaderForUser(user) {
+      // Anonymous sessions are created only to allow a visitor to submit a provider application.
+      const signedIn = !!user && !user.isAnonymous;
+      loginNavButton.hidden = signedIn;
+      profileMenu.hidden = !signedIn;
+      if (signedIn) {
+        const email = user.email || "";
+        const display = (user.displayName || email.split("@")[0] || "મારું એકાઉન્ટ").trim();
+        profileDisplayName.textContent = display;
+        profileName.textContent = user.displayName || "વપરાશકર્તા";
+        profileEmail.textContent = email;
+        profileTrigger.setAttribute("aria-label", "પ્રોફાઇલ મેનૂ: " + display);
+      } else {
+        closeProfileMenu();
+      }
+    }
+
     const adminStatus = document.getElementById("adminStatus");
     const adminTools = document.getElementById("adminTools");
     const pendingList = document.getElementById("pendingList");
@@ -1939,6 +2064,7 @@
     });
 
     onAuthStateChanged(auth, user => {
+      updateHeaderForUser(user);
       if (user && user.uid === ADMIN_UID) {
         adminTools.hidden = false;
         setAdminMessage("એડમિન સેશન સક્રિય છે.");
