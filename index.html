@@ -1522,8 +1522,23 @@
       </div>
     </section>
 
+
+    <section class="section" id="myApplications">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">MY APPLICATIONS</span>
+          <h2>મારી અરજીઓ</h2>
+          <p>તમે મોકલેલી બિઝનેસ લિસ્ટિંગ અરજીઓ અને તેમની હાલની સ્થિતિ અહીં જુઓ.</p>
+        </div>
+        <div id="myApplicationsList" class="services-grid">
+          <div class="empty-state">અરજીઓ જોવા માટે તમારા એકાઉન્ટમાં લૉગિન કરો.</div>
+        </div>
+        <div style="text-align:center;margin-top:24px"><a href="#register" class="btn btn-outline">નવી બિઝનેસ અરજી કરો</a></div>
+      </div>
+    </section>
+
     <section class="provider-section" id="register">
-      <span id="myApplications" aria-hidden="true" style="display:block;position:relative;top:-90px;visibility:hidden;"></span>
+
       <div class="container provider-grid">
         <div>
           <span class="section-kicker">GROW YOUR BUSINESS</span>
@@ -1964,7 +1979,56 @@
         showToast("લૉગઆઉટ થઈ શક્યું નથી. ફરી પ્રયાસ કરો.");
       }
     });
-    document.getElementById("myApplicationsLink").addEventListener("click", () => closeProfileMenu());
+    document.getElementById("myApplicationsLink").addEventListener("click", () => {
+      closeProfileMenu();
+      setTimeout(loadMyApplications, 150);
+    });
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[ch]));
+    }
+    function applicationStatus(status) {
+      const map = {
+        pending: ["પેન્ડિંગ", "#fff3cd", "#856404"],
+        approved: ["મંજૂર", "#d1e7dd", "#0f5132"],
+        rejected: ["નામંજૂર", "#f8d7da", "#842029"]
+      };
+      return map[status] || [status || "સ્થિતિ ઉપલબ્ધ નથી", "#e2e3e5", "#41464b"];
+    }
+    async function loadMyApplications() {
+      const box = document.getElementById("myApplicationsList");
+      const user = auth.currentUser;
+      if (!user || user.isAnonymous) {
+        box.innerHTML = '<div class="empty-state"><strong>લૉગિન જરૂરી છે</strong><br>તમારી અરજીઓ જોવા માટે પહેલા લૉગિન કરો.</div>';
+        return;
+      }
+      box.innerHTML = '<div class="empty-state">તમારી અરજીઓ લોડ થઈ રહી છે...</div>';
+      try {
+        const q = query(collection(db, "businesses"), where("ownerUid", "==", user.uid));
+        const snapshot = await getDocs(q);
+        if (snapshot.empty) {
+          box.innerHTML = '<div class="empty-state"><strong>હજુ કોઈ અરજી મળી નથી.</strong><br>નવી અરજી કરવા માટે “નવી બિઝનેસ અરજી કરો” પસંદ કરો.</div>';
+          return;
+        }
+        const items = snapshot.docs.map(d => ({id:d.id, ...d.data()}));
+        items.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+        box.innerHTML = items.map(item => {
+          const st = applicationStatus(item.status);
+          const date = item.createdAt?.toDate ? item.createdAt.toDate().toLocaleDateString("gu-IN") : "હમણાં જ / તારીખ ઉપલબ્ધ નથી";
+          return `<article class="service-card" style="padding:22px;border:1px solid var(--border, #e5e7eb);border-radius:16px;background:var(--card, #fff)">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap"><h3 style="margin:0">${escapeHtml(item.businessName || "બિઝનેસ અરજી")}</h3><span style="padding:6px 10px;border-radius:20px;background:${st[1]};color:${st[2]};font-size:13px;font-weight:700">${escapeHtml(st[0])}</span></div>
+            <p style="margin:12px 0 6px"><strong>કેટેગરી:</strong> ${escapeHtml(item.category || "—")}</p>
+            <p style="margin:6px 0"><strong>શહેર / ગામ:</strong> ${escapeHtml(item.city || "—")}</p>
+            <p style="margin:6px 0"><strong>મોબાઇલ:</strong> ${escapeHtml(item.phone || "—")}</p>
+            <p style="margin:6px 0"><strong>અરજી તારીખ:</strong> ${escapeHtml(date)}</p>
+            ${item.status === "rejected" ? '<p style="margin-top:12px;color:#842029">આ અરજી મંજૂર થઈ નથી. વધુ માહિતી માટે એડમિનનો સંપર્ક કરો.</p>' : item.status === "approved" ? '<p style="margin-top:12px;color:#0f5132">તમારી અરજી મંજૂર થઈ છે.</p>' : '<p style="margin-top:12px">તમારી અરજીની ચકાસણી ચાલી રહી છે.</p>'}
+          </article>`;
+        }).join("");
+      } catch (error) {
+        console.error("Could not load user applications:", error);
+        box.innerHTML = '<div class="empty-state"><strong>અરજીઓ લોડ થઈ શકી નથી.</strong><br>Firebase Firestore Rules માં વપરાશકર્તાને પોતાની અરજીઓ વાંચવાની પરવાનગી છે કે નહીં તે તપાસો.</div>';
+      }
+    }
     document.getElementById("accountSettingsLink").addEventListener("click", () => closeProfileMenu());
 
     function updateHeaderForUser(user) {
@@ -1979,6 +2043,7 @@
         profileName.textContent = user.displayName || "વપરાશકર્તા";
         profileEmail.textContent = email;
         profileTrigger.setAttribute("aria-label", "પ્રોફાઇલ મેનૂ: " + display);
+        if (location.hash === "#myApplications") loadMyApplications();
       } else {
         closeProfileMenu();
       }
